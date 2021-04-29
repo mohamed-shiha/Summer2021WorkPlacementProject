@@ -4,12 +4,10 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
-
-### More Information
-
-A place to include any other types of information that you'd like to include about yourself.
+I am an enthusiastic programmer with a very solid background in networking, very good knowledge of programming languages, data structures, troubleshooting and debugging. Dedicated to meet the task requirements with efficient and clean solutions.
+I have Multiple years of experience with customer support and programming.
+I am Very comfortable working with teams to find solutions as well as with clients. 
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[mohamedshiha89@gmail.com](mailto:mohamedshiha89@gmail.com)
