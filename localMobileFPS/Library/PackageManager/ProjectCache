@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637558586200831445
-    m_Hash: 7202817
+      ticks: 637562082918437585
+    m_Hash: 882070738
   m_LockFileStatus:
     m_FilePath: D:/Summer/Summer2021WorkPlacmentProject/localMobileFPS/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637558586200871443
-    m_Hash: 3627557465
+      ticks: 637562082918467611
+    m_Hash: 3768255120
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -22,58 +22,6 @@ m_LocalPackages:
 m_ProjectPath: D:/Summer/Summer2021WorkPlacmentProject/localMobileFPS/Packages
 m_EditorVersion: 2021.1.5f1 (3737af19df53)
 m_ResolvedPackages:
-- packageId: com.hwaet.projectcloner@https://github.com/hwaet/UnityProjectCloner.git
-  testable: 0
-  isDirectDependency: 1
-  version: 0.0.1
-  source: 5
-  resolvedPath: D:\Summer\Summer2021WorkPlacmentProject\localMobileFPS\Library\PackageCache\com.hwaet.projectcloner@2b7497d79e
-  assetPath: Packages/com.hwaet.projectcloner
-  name: com.hwaet.projectcloner
-  displayName: Project Cloner
-  author:
-    name: 
-    email: 
-    url: 
-  category: Unity
-  type: 
-  description: A tool to let the user quickly clone their project, for multiplayer
-    testing.
-  status: 4
-  errors: []
-  versions:
-    all: []
-    compatible: []
-    verified: 
-  dependencies: []
-  resolvedDependencies: []
-  keywords:
-  - multiplayer
-  - unity
-  - editor
-  registry:
-    id: 
-    name: 
-    url: 
-    scopes: []
-    isDefault: 0
-    capabilities: 0
-  hasRegistry: 0
-  hideInEditor: 1
-  entitlements:
-    isAllowed: 1
-  isAssetStorePackage: 0
-  datePublishedTicks: 0
-  documentationUrl: 
-  hasRepository: 0
-  repository:
-    type: 
-    url: 
-    revision: 
-    path: 
-  unityLifecycle:
-    version: 
-    nextVersion: 
 - packageId: com.unity.collab-proxy@1.3.9
   testable: 0
   isDirectDependency: 1
