@@ -1,6 +1,8 @@
 using System;
 using System.Text;
 using MLAPI;
+using MLAPI.SceneManagement;
+using MLAPI.Transports.UNET;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +26,7 @@ public class StartMenu : MonoBehaviour
     public Transform PlayModeScreen;
     public TMP_InputField ServerPasswordInput;
     public Button ConnectCreateButton;
+    public Button ReadyPlayButton;
 
     private void Start()
     {
@@ -130,13 +133,21 @@ public class StartMenu : MonoBehaviour
 
     public void StartAsClient()
     {
+        ReadyPlayButton.GetComponentInChildren<TextMeshProUGUI>().text = "Ready";
         NetworkManager.Singleton.NetworkConfig.ConnectionData = Encoding.ASCII.GetBytes(ServerPasswordInput.text);
         NetworkManager.Singleton.StartClient();
     }
 
+    public void PlayReady()
+    {
+        NetworkSceneManager.SwitchScene("GamePlay");
+    }
+
     public void StartAsHost()
     {
+        ReadyPlayButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start Match";
         NetworkManager.Singleton.ConnectionApprovalCallback += Singleton_ConnectionApprovalCallback;
+        Debug.Log(NetworkManager.Singleton.gameObject.GetComponent<UNetTransport>().ConnectAddress);
         NetworkManager.Singleton.StartHost();
     }
 
@@ -146,7 +157,6 @@ public class StartMenu : MonoBehaviour
         bool approveConnection = password.Equals(ServerPasswordInput.text);
         int posIndex = NetworkManager.Singleton.ConnectedClients.Count;
         Transform pos = SpawnLocationsParent.GetChild(posIndex);
-        Debug.Log(pos);
         callBack(true, null, approveConnection, pos.position, pos.rotation);
     }
 
