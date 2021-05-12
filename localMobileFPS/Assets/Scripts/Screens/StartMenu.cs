@@ -1,0 +1,198 @@
+using System;
+using System.Text;
+using MLAPI;
+using MLAPI.SceneManagement;
+using MLAPI.Transports.UNET;
+using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public enum ScreenNames
+{
+    Start,
+    PlayMode,
+    Settings,
+    Lobby,
+    PlayerRecords,
+}
+public class StartMenu : MonoBehaviour
+{
+
+    public Transform SpawnLocationsParent;
+    public Transform StartScreen;
+    public Transform LobbyScreen;
+    public Transform SettingsScreen;
+    public Transform PlayerRecords;
+    public Transform PlayModeScreen;
+    public TMP_InputField ServerPasswordInput;
+    public Button ConnectCreateButton;
+    public Button ReadyPlayButton;
+    public TMP_Dropdown TeamSelectDropDown;
+
+    private void Start()
+    {
+        // start with start screen active
+        NetworkManager.Singleton.OnServerStarted += Singleton_OnServerStarted;
+        NetworkManager.Singleton.OnClientConnectedCallback += Singleton_OnClientConnectedCallback;
+        NetworkManager.Singleton.OnClientDisconnectCallback += Singleton_OnClientDisconnectCallback;
+
+        TeamSelectDropDown.onValueChanged.AddListener((int value) => OnTeamSelected(TeamSelectDropDown.value));
+        ConnectCreateButton.onClick.AddListener(() => ConnectOrHost(ConnectCreateButton.GetComponentInChildren<TextMeshProUGUI>().text));
+        ShowScreen(ScreenNames.Start);
+    }
+    private void OnDestroy()
+    {
+        if (NetworkManager.Singleton == null) return;
+        NetworkManager.Singleton.OnServerStarted -= Singleton_OnServerStarted;
+        NetworkManager.Singleton.OnClientConnectedCallback -= Singleton_OnClientConnectedCallback;
+        NetworkManager.Singleton.OnClientDisconnectCallback -= Singleton_OnClientDisconnectCallback;
+    }
+
+    #region NetworkEvents
+
+
+    private void Singleton_OnServerStarted()
+    {
+        if (NetworkManager.Singleton.IsHost)
+            Singleton_OnClientConnectedCallback(NetworkManager.Singleton.LocalClientId);
+    }
+
+    private void Singleton_OnClientConnectedCallback(ulong obj)
+    {
+        GameManager.Instance.Players.Add(NetworkManager.Singleton.ConnectedClients[obj].PlayerObject.gameObject);
+        GameManager.Instance.LocalPlayer = NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.LocalClientId].PlayerObject.gameObject;
+        ShowScreen(ScreenNames.Lobby);
+    }
+
+    private void Singleton_OnClientDisconnectCallback(ulong clientId)
+    {
+        if (clientId == NetworkManager.Singleton.LocalClientId)
+            ShowScreen(ScreenNames.Start);
+    }
+    private void Singleton_ConnectionApprovalCallback(byte[] connectionData, ulong clientId, NetworkManager.ConnectionApprovedDelegate callback)
+    {
+        // get the password as a string
+        string password = Encoding.ASCII.GetString(connectionData);
+        // set the approval bool
+        bool approveConnection = password.Equals(ServerPasswordInput.text);
+        // spawn location in lobby 
+        int posIndex = NetworkManager.Singleton.ConnectedClients.Count;
+        Transform pos = SpawnLocationsParent.GetChild(posIndex);
+        // call the callback
+        callback(true, null, approveConnection, pos.position, pos.rotation);
+    }
+    #endregion
+
+    #region Buttons
+
+    public void PlayReady()
+    {
+        if (NetworkManager.Singleton.IsHost)
+            NetworkSceneManager.SwitchScene("GamePlay");
+        else return; // set the players to be ready only if all players ready start the game 
+    }
+
+    public void GoToPlayMode()
+    {
+        ShowScreen(ScreenNames.PlayMode);
+        // Debug.Log("Button Start Game Mode");
+    }
+    public void LeaveLobby()
+    {
+        if (NetworkManager.Singleton.IsHost)
+        {
+            NetworkManager.Singleton.StopHost();
+            NetworkManager.Singleton.ConnectionApprovalCallback -= Singleton_ConnectionApprovalCallback;
+        }
+        else NetworkManager.Singleton.StopClient();
+
+        ShowScreen(ScreenNames.Start);
+    }
+
+    public void GoToSettings()
+    {
+        ShowScreen(ScreenNames.Settings);
+    }
+
+
+    public void SaveAndExit()
+    {
+        Application.Quit();
+        //Debug.Log("Button Save and exit");
+    }
+
+    public void ConnectOrHost(string button)
+    {
+        string buttonClickedName = button.ToLower();
+        if (buttonClickedName.Equals("connect"))
+            StartAsClient();
+        else StartAsHost();
+        //Debug.Log(button);
+    }
+
+    public void ShowPlayerRecords()
+    {
+        ShowScreen(ScreenNames.PlayerRecords);
+        //Debug.Log("Button Show Player Records");
+    }
+
+    public void BackToMainMenu()
+    {
+        ShowScreen(ScreenNames.Start);
+        Debug.Log("Button Show BackToMain");
+    }
+
+    public void StartAsClient()
+    {
+        ReadyPlayButton.GetComponentInChildren<TextMeshProUGUI>().text = "Ready";
+        NetworkManager.Singleton.NetworkConfig.ConnectionData = Encoding.ASCII.GetBytes(ServerPasswordInput.text);
+        NetworkManager.Singleton.StartClient();
+    }
+
+
+    public void StartAsHost()
+    {
+        ReadyPlayButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start Match";
+        NetworkManager.Singleton.ConnectionApprovalCallback += Singleton_ConnectionApprovalCallback;
+        //Debug.Log(NetworkManager.Singleton.gameObject.GetComponent<UNetTransport>().ConnectAddress);
+        NetworkManager.Singleton.StartHost();
+    }
+
+    #endregion
+
+    public void OnTeamSelected(int index)
+    {
+        Teams team = (Teams)index;
+        GameManager.Instance.LocalPlayer.GetComponent<PlayerData>().team = team;
+    }
+
+    private void ShowScreen(ScreenNames screen)
+    {
+        StartScreen.gameObject.SetActive(false);
+        SettingsScreen.gameObject.SetActive(false);
+        PlayModeScreen.gameObject.SetActive(false);
+        PlayerRecords.gameObject.SetActive(false);
+        LobbyScreen.gameObject.SetActive(false);
+
+
+        switch (screen)
+        {
+            case ScreenNames.Start:
+                StartScreen.gameObject.SetActive(true);
+                break;
+            case ScreenNames.PlayMode:
+                PlayModeScreen.gameObject.SetActive(true);
+                break;
+            case ScreenNames.Settings:
+                SettingsScreen.gameObject.SetActive(true);
+                break;
+            case ScreenNames.Lobby:
+                LobbyScreen.gameObject.SetActive(true);
+                break;
+            case ScreenNames.PlayerRecords:
+                PlayerRecords.gameObject.SetActive(true);
+                break;
+        }
+    }
+}

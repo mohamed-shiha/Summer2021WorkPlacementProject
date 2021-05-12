@@ -51,13 +51,12 @@ MonoBehaviour:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 7862417467475977008}
     RegisteredScenes:
-    - TestScene
     - MainMenu
     - GamePlay
     AllowRuntimeSceneChanges: 0
     NetworkPrefabs:
-    - Prefab: {fileID: 8347478994734350994, guid: 636639f0b3e181b41bd1529c4dccd83e, type: 3}
-      PlayerPrefab: 1
+    - Prefab: {fileID: 1708023053000455649, guid: 5dc08ea072fc4074e9eeb3fe824fde2c, type: 3}
+      PlayerPrefab: 0
     PlayerPrefabHash:
       id: 0
     CreatePlayerPrefab: 1
@@ -66,7 +65,7 @@ MonoBehaviour:
     MaxReceiveEventsPerTickRate: 500
     EventTickrate: 64
     ClientConnectionBufferTimeout: 10
-    ConnectionApproval: 0
+    ConnectionApproval: 1
     ConnectionData: 
     EnableTimeResync: 0
     TimeResyncInterval: 30
@@ -85,9 +84,7 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: NullableBoolSerializable, ns: MLAPI.Configuration, asm: Unity.Multiplayer.MLAPI.Runtime}
-      data:
-        Value: 1897319656204293034
+      type: {class: , ns: , asm: }
 --- !u!114 &7862417467475977008
 MonoBehaviour:
   m_ObjectHideFlags: 0

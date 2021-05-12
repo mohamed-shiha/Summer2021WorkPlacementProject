@@ -287,9 +287,13 @@
 -r:"Library/Bee/artifacts/1900b0aP.dag/Unity.VisualScripting.Flow.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aP.dag/Unity.VisualScripting.State.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aP.dag/UnityEngine.UI.ref.dll"
-"Assets/Scripts/FirstPersonController.cs"
-"Assets/Scripts/PlayScreen.cs"
-"Assets/Scripts/StartMenu.cs"
+"Assets/Scripts/GameManager.cs"
+"Assets/Scripts/Player/DataManager.cs"
+"Assets/Scripts/Player/FirstPersonController.cs"
+"Assets/Scripts/Player/PlayerData.cs"
+"Assets/Scripts/Screens/PlayScreen.cs"
+"Assets/Scripts/Screens/StartMenu.cs"
+"Assets/Scripts/Spawning/SpawnPoint.cs"
 -langversion:8.0
 
 /deterministic
