@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using MLAPI;
+using MLAPI.Messaging;
 using MLAPI.SceneManagement;
 using MLAPI.Transports.UNET;
 using TMPro;
@@ -63,6 +64,7 @@ public class StartMenu : MonoBehaviour
         GameManager.Instance.Players.Add(NetworkManager.Singleton.ConnectedClients[obj].PlayerObject.gameObject);
         GameManager.Instance.LocalPlayer = NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.LocalClientId].PlayerObject.gameObject;
         ShowScreen(ScreenNames.Lobby);
+        OnTeamSelected(0);
     }
 
     private void Singleton_OnClientDisconnectCallback(ulong clientId)
@@ -89,8 +91,16 @@ public class StartMenu : MonoBehaviour
     public void PlayReady()
     {
         if (NetworkManager.Singleton.IsHost)
-            NetworkSceneManager.SwitchScene("GamePlay");
-        else return; // set the players to be ready only if all players ready start the game 
+        {
+            if (GameManager.Instance.IsAllPlayersReady())
+                NetworkSceneManager.SwitchScene("GamePlay");
+            else Debug.Log("Ready up Please");
+        }
+        else
+        {
+            GameManager.Instance.LocalPlayer.GetComponent<PlayerData>()._SetReadyServerRpc(true);
+            ReadyPlayButton.enabled = false;
+        }
     }
 
     public void GoToPlayMode()
@@ -164,8 +174,12 @@ public class StartMenu : MonoBehaviour
     public void OnTeamSelected(int index)
     {
         Teams team = (Teams)index;
-        GameManager.Instance.LocalPlayer.GetComponent<PlayerData>().team = team;
+        GameManager.Instance.LocalPlayer.GetComponent<PlayerData>()._SetTeamServerRpc(team);
+        // if (NetworkManager.Singleton.IsHost)
+        GameManager.Instance.LocalPlayer.GetComponent<PlayerData>().LocalSetTeam(team);
     }
+
+
 
     private void ShowScreen(ScreenNames screen)
     {

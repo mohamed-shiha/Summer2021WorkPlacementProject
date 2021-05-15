@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MLAPI;
+using MLAPI.Messaging;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -41,9 +43,14 @@ public class GameManager : MonoBehaviour
         var points = FindObjectsOfType<SpawnPoint>();
         foreach (var player in Players)
         {
-            var playerTeam = player.GetComponent<PlayerData>().team;
+            var playerTeam = player.GetComponent<PlayerData>().Team;
             player.transform.position = points.First(p => p.Team == playerTeam).GetNewPosition();
             player.GetComponent<FirstPersonController>().PlayMode = true;
         }
+    }
+
+    public bool IsAllPlayersReady()
+    {
+        return Players.Where(p => !p.GetComponent<PlayerData>().Ready.Value).Count() == 1;
     }
 }

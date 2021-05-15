@@ -40,8 +40,8 @@ public class FirstPersonController : NetworkBehaviour
             cc = GetComponent<CharacterController>();
         else
         {
-            cameraTransform.gameObject.SetActive(false);
             cameraTransform.GetComponent<AudioListener>().enabled = false;
+            cameraTransform.GetComponent<Camera>().enabled = false;
         }
     }
 
