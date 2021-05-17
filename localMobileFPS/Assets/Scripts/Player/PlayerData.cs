@@ -1,4 +1,3 @@
-using System.Linq.Expressions;
 using MLAPI;
 using MLAPI.Messaging;
 using MLAPI.NetworkVariable;
@@ -8,9 +7,9 @@ public class PlayerData : NetworkBehaviour
 {
 
     public Teams Team;
-    public MeshRenderer Renderer;
+    public SkinnedMeshRenderer Renderer;
     // Testing
-    public Canvas _Canvas;
+    //public Canvas _Canvas;
 
     private NetworkVariable<Teams> _team = new NetworkVariable<Teams>();
     public NetworkVariableBool Ready = new NetworkVariableBool();
@@ -23,7 +22,7 @@ public class PlayerData : NetworkBehaviour
     private void Start()
     {
 
-        _Canvas.enabled = IsLocalPlayer;
+       // _Canvas.enabled = IsLocalPlayer;
     }
 
     private void OnDisable()

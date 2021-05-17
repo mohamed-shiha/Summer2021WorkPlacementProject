@@ -9,13 +9,24 @@ public class PlayerAttack : MonoBehaviour
     {
         CurrentWeapon = GetComponentInChildren<Weapon>();
     }
+
     private void Update()
     {
         if (CurrentWeapon == null)
             return;
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-            Fire();
+        switch (CurrentWeapon.firingMode)
+        {
+            case FiringMode.Automatic:
+                if (Input.GetKey(KeyCode.Mouse0))
+                    Fire();
+                break;
+            case FiringMode.Burst:
+            case FiringMode.Bolt:
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                    Fire();
+                break;
+        }
+        
         if (Input.GetKeyUp(KeyCode.R))
             Reload();
     }

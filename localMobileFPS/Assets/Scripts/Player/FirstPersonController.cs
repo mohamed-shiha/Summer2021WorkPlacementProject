@@ -31,13 +31,20 @@ public class FirstPersonController : NetworkBehaviour
 
     //the character component to move the player
     CharacterController cc;
+    PlayerAnimationController animationController;
 
     private void Start()
     {
         cameraTransform = GetComponentInChildren<Camera>().transform;
 
+/*        cc = GetComponent<CharacterController>();
+        animationController = GetComponent<PlayerAnimationController>();*/
+
         if (IsLocalPlayer)
+        {
             cc = GetComponent<CharacterController>();
+            animationController = GetComponent<PlayerAnimationController>();
+        }
         else
         {
             cameraTransform.GetComponent<AudioListener>().enabled = false;
@@ -50,10 +57,12 @@ public class FirstPersonController : NetworkBehaviour
     {
         if (!IsLocalPlayer)
             return;
+
         if (PlayMode)
         {
             Look();
             Move();
+
         }
     }
 
@@ -79,6 +88,10 @@ public class FirstPersonController : NetworkBehaviour
         input = Vector3.ClampMagnitude(input, 1f);
         //transform it based off the player transform and scale it by movement speed
         Vector3 move = transform.TransformVector(input) * movementSpeed;
+
+        // play animation 
+        animationController.StartWalkingAnimation(input.z != 0);
+
         //is it on the ground
         if (cc.isGrounded)
         {
@@ -92,7 +105,8 @@ public class FirstPersonController : NetworkBehaviour
         //add the gravity to the Y velocity
         yVelocity -= gravity * Time.deltaTime;
         move.y = yVelocity;
-        //and finally move
+
+        //Apply movement
         cc.Move(move * Time.deltaTime);
     }
 

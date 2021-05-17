@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum Teams
 {
@@ -21,6 +22,9 @@ public class SpawnPoint : MonoBehaviour
                 queue.Enqueue(pos.position);
         Vector3 newPos = queue.Dequeue();
         queue.Enqueue(newPos);
+
+        Debug.Log(SceneManager.GetActiveScene().name);
+        Debug.Log("New location" + newPos);
         return newPos;
     }
 }

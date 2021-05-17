@@ -1422,7 +1422,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289988602}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalPosition: {x: 0, y: 0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3169,7 +3169,7 @@ PrefabInstance:
     - target: {fileID: 7862417467475977009, guid: 2eb1e5c336b374c4e95873d728f46e35, type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[0].Prefab
       value: 
-      objectReference: {fileID: 2699541615817244657, guid: 5d353d131e213f94fb9639806519a1fa, type: 3}
+      objectReference: {fileID: 6136163825399743369, guid: f4a873398352e3f41bd9fbf757e612bd, type: 3}
     - target: {fileID: 7862417467475977009, guid: 2eb1e5c336b374c4e95873d728f46e35, type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[0].PlayerPrefab
       value: 1
@@ -3180,7 +3180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7862417467475977014, guid: 2eb1e5c336b374c4e95873d728f46e35, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7862417467475977014, guid: 2eb1e5c336b374c4e95873d728f46e35, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4640,7 +4640,7 @@ Transform:
   - {fileID: 1305143825}
   - {fileID: 321362718}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1293505806
 GameObject:

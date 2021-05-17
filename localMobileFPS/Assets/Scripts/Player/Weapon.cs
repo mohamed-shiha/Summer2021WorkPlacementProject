@@ -1,5 +1,11 @@
 using UnityEngine;
 
+public enum FiringMode
+{
+    Automatic,
+    Burst,
+    Bolt
+}
 public class Weapon : MonoBehaviour
 {
     public float Damage;
@@ -8,9 +14,10 @@ public class Weapon : MonoBehaviour
     public float SideAmmo;
     public float MaxSideAmmo;
     public float FireRate;
-    private float FireTime;
     public float MaxDistance;
     public Transform FirePoint;
+    public FiringMode firingMode;
+    private float FireTime;
 
     public virtual void Fire()
     {
@@ -26,14 +33,6 @@ public class Weapon : MonoBehaviour
         }
     }
 
-   /* private void OnDrawGizmos()
-    {
-        if (on)
-        {
-            Gizmos.DrawLine(FirePoint.position, FirePoint.forward.normalized * 1000);
-            on = false;
-        }
-    }*/
     public virtual void Reload()
     {
         SideAmmo += CurrentAmmo;
@@ -52,5 +51,4 @@ public class Weapon : MonoBehaviour
             }
         }
     }
-
 }
