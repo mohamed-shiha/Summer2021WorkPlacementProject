@@ -9,6 +9,7 @@ public class PlayerData : NetworkBehaviour
 
     public Teams Team;
     public MeshRenderer Renderer;
+    // Testing
     public Canvas _Canvas;
 
     private NetworkVariable<Teams> _team = new NetworkVariable<Teams>();
