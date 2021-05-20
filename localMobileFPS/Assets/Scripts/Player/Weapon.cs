@@ -14,8 +14,10 @@ public class Weapon : MonoBehaviour
     public float SideAmmo;
     public float MaxSideAmmo;
     public float FireRate;
+    public float ReloadTime;
     public float MaxDistance;
     public Transform FirePoint;
+    public GameObject bulletPrefab;
     public FiringMode firingMode;
     private float FireTime;
 
@@ -24,11 +26,14 @@ public class Weapon : MonoBehaviour
         if (FireTime <= Time.time)
         {
             //on = true;
-            if (Physics.Raycast(FirePoint.position, FirePoint.forward, out RaycastHit hit, MaxDistance))
-            {
-                Debug.Log("Fire: hitName :" + hit.transform.name);
-                Debug.Log("Fire: hitTag :" + (hit.transform.tag));
-            }
+            /*            if (Physics.Raycast(FirePoint.position, FirePoint.forward, out RaycastHit hit, MaxDistance))
+                        {
+                            Debug.Log("Fire: hitName :" + hit.transform.name);
+                            Debug.Log("Fire: hitTag :" + (hit.transform.tag));
+                        }*/
+
+            Instantiate(bulletPrefab,FirePoint.position,FirePoint.rotation);
+            CurrentAmmo--;
             FireTime = Time.time + FireRate;
         }
     }
@@ -37,8 +42,10 @@ public class Weapon : MonoBehaviour
     {
         SideAmmo += CurrentAmmo;
         CurrentAmmo = 0;
+        FireTime = Time.time + ReloadTime;
         if (SideAmmo > 0)
         {
+            Debug.Log("Reloading");
             if (SideAmmo >= MaxAmmo)
             {
                 CurrentAmmo = MaxAmmo;
