@@ -30,9 +30,6 @@ public class Weapon : MonoBehaviour
             //on = true;
             if (Physics.Raycast(FirePoint.position, FirePoint.forward, out RaycastHit hit, MaxDistance, DamageMask))
             {
-                Debug.Log("Fire: hitName :" + hit.transform.name);
-                Debug.Log("Fire: hitTag :" + (hit.transform.tag));
-
                 var tag = hit.transform.tag;
                 float damage = 0;
                 if (tag.Contains("Player"))

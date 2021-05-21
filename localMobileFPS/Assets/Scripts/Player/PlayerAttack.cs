@@ -1,17 +1,22 @@
+using MLAPI;
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour
+public class PlayerAttack : NetworkBehaviour
 {
     public Weapon CurrentWeapon;
     public Weapon PreviousWeapon;
 
     private void Start()
     {
-        CurrentWeapon = GetComponentInChildren<Weapon>();
+        if (IsLocalPlayer)
+            CurrentWeapon = GetComponentInChildren<Weapon>();
     }
 
     private void Update()
     {
+        if (!IsLocalPlayer)
+            return;
+
         if (CurrentWeapon == null)
             return;
         switch (CurrentWeapon.firingMode)
@@ -26,7 +31,7 @@ public class PlayerAttack : MonoBehaviour
                     Fire();
                 break;
         }
-        
+
         if (Input.GetKeyUp(KeyCode.R))
             Reload();
     }

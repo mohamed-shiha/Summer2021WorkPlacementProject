@@ -41,9 +41,24 @@ public class GameManager : MonoBehaviour
         foreach (var player in Players)
         {
             var playerTeam = player.GetComponent<PlayerData>().Team;
+            if (playerTeam == LocalPlayer.GetComponent<PlayerData>().Team)
+            {
+                Setlayer(player, LayerMask.NameToLayer("Friendly"));
+            }
             player.transform.position = points.First(p => p.Team == playerTeam).GetNewPosition();
             player.GetComponent<PlayerController_prototype>().State = PlayerState.InGame;
             //Debug.Log($"Player: {player.name} is in pos: {player.transform.position}");
+        }
+    }
+
+    private void Setlayer(GameObject gObject, LayerMask layer)
+    {
+
+        gObject.layer = layer;
+        for (int i = 0; i < gObject.transform.childCount; i++)
+        {
+            if (gObject.transform.childCount > 0)
+                Setlayer(gObject.transform.GetChild(i).gameObject, layer);
         }
     }
 

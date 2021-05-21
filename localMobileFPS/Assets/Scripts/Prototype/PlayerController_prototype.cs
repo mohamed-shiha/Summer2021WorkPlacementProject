@@ -18,7 +18,7 @@ public class PlayerController_prototype : MonoBehaviour
         get { return _State; }
         set
         {
-            OnStateChanged.Invoke(_State,value);
+            OnStateChanged?.Invoke(_State,value);
             _State = value;
         }
     }
