@@ -8,6 +8,8 @@ public class PlayerData : NetworkBehaviour
 
     public Teams Team;
     public SkinnedMeshRenderer Renderer;
+    public MeshRenderer _Renderer;
+
     // Testing
     //public Canvas _Canvas;
 
@@ -22,7 +24,7 @@ public class PlayerData : NetworkBehaviour
     private void Start()
     {
 
-       // _Canvas.enabled = IsLocalPlayer;
+        // _Canvas.enabled = IsLocalPlayer;
     }
 
     private void OnDisable()
@@ -41,7 +43,10 @@ public class PlayerData : NetworkBehaviour
     public void LocalSetTeam(Teams newValue)
     {
         Team = newValue;
-        Renderer.material = DataManager.Instance.AllMaterials[newValue];
+        if (Renderer != null)
+            Renderer.material = DataManager.Instance.AllMaterials[newValue];
+        else
+            _Renderer.material = DataManager.Instance.AllMaterials[newValue];
     }
 
     [ServerRpc]
@@ -56,4 +61,7 @@ public class PlayerData : NetworkBehaviour
         _team.Value = newTeam;
         LocalSetTeam(newTeam);
     }
+
+
+
 }

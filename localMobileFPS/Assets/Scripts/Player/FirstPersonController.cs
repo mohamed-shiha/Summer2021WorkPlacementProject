@@ -44,11 +44,36 @@ public class FirstPersonController : NetworkBehaviour
         {
             cc = GetComponent<CharacterController>();
             animationController = GetComponent<PlayerAnimationController>();
+            GetComponent<PlayerController_prototype>().OnStateChanged += OnStateChanged;
+            GetComponent<PlayerController_prototype>().State = PlayerState.Lobby;
         }
         else
         {
             cameraTransform.GetComponent<AudioListener>().enabled = false;
             cameraTransform.GetComponent<Camera>().enabled = false;
+        }
+    }
+
+    public void OnStateChanged(PlayerState oldState,PlayerState newState)
+    {
+        switch (newState)
+        {
+            case PlayerState.Lobby:
+                cameraTransform.gameObject.SetActive(false);
+                PlayMode = false;
+                break;
+            case PlayerState.InGame:
+                cameraTransform.gameObject.SetActive(true);
+                PlayMode = true;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                break;
+            case PlayerState.Dead:
+                break;
+            case PlayerState.PreGame:
+                break;
+            default:
+                break;
         }
     }
 
@@ -90,7 +115,7 @@ public class FirstPersonController : NetworkBehaviour
         Vector3 move = transform.TransformVector(input) * movementSpeed;
 
         // play animation 
-        animationController.StartWalkingAnimation(input.z != 0);
+        //animationController.StartWalkingAnimation(input.z != 0);
 
         //is it on the ground
         if (cc.isGrounded)

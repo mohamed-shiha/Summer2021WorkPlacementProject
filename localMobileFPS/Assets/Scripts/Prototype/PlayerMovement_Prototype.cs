@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class PlayerMovement_Prototype : MonoBehaviour
@@ -16,8 +13,8 @@ public class PlayerMovement_Prototype : MonoBehaviour
     [Range(5f, 15f)]
     public float jumpSpeed = 10f;
 
-    //now the camera so we can move it up and down
-    Transform cameraTransform;
+    // the camera so i can move it up and down
+    public Transform cameraTransform;
     float pitch = 0f;
     [Range(1f, 90f)]
     public float maxPitch = 85f;
@@ -32,7 +29,7 @@ public class PlayerMovement_Prototype : MonoBehaviour
     private void Start()
     {
         cc = GetComponent<CharacterController>();
-        cameraTransform = GetComponentInChildren<Camera>().transform;
+        //cameraTransform = GetComponentInChildren<Camera>().transform;
         Cursor.lockState = CursorLockMode.Locked;
     }
 

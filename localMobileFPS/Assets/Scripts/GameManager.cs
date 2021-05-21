@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using MLAPI;
-using MLAPI.Messaging;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -45,8 +42,8 @@ public class GameManager : MonoBehaviour
         {
             var playerTeam = player.GetComponent<PlayerData>().Team;
             player.transform.position = points.First(p => p.Team == playerTeam).GetNewPosition();
-            player.GetComponent<FirstPersonController>().PlayMode = true;
-            Debug.Log($"Player: {player.name} is in pos: {player.transform.position}");
+            player.GetComponent<PlayerController_prototype>().State = PlayerState.InGame;
+            //Debug.Log($"Player: {player.name} is in pos: {player.transform.position}");
         }
     }
 

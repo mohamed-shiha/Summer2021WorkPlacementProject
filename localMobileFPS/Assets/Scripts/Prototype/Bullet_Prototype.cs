@@ -4,6 +4,7 @@ public class Bullet_Prototype : MonoBehaviour
 {
     public float speed;
     public Rigidbody rbody;
+
     // Update is called once per frame
     void Update()
     {
@@ -15,7 +16,6 @@ public class Bullet_Prototype : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.transform.name);
-        Destroy(this.gameObject);
+            Destroy(this.gameObject);
     }
 }

@@ -17,14 +17,14 @@ public class SpawnPoint : MonoBehaviour
 
     public Vector3 GetNewPosition()
     {
-        if(queue.Count == 0)
+        if (queue.Count == 0)
             foreach (var pos in Positions)
                 queue.Enqueue(pos.position);
         Vector3 newPos = queue.Dequeue();
         queue.Enqueue(newPos);
 
-        Debug.Log(SceneManager.GetActiveScene().name);
-        Debug.Log("New location" + newPos);
+        // Debug.Log(SceneManager.GetActiveScene().name);
+        //Debug.Log("New location" + newPos);
         return newPos;
     }
 }

@@ -6,16 +6,18 @@ TagManager:
   tags:
   - Wall
   - Ground
+  - PlayerBody
+  - PlayerHead
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Friendly
+  - Both
+  - Player
   - 
   - 
   - 

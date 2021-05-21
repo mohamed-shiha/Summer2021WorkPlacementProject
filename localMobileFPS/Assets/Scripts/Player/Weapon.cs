@@ -8,7 +8,8 @@ public enum FiringMode
 }
 public class Weapon : MonoBehaviour
 {
-    public float Damage;
+    public float HeadDamage;
+    public float BodyDamage;
     public float MaxAmmo;
     public float CurrentAmmo;
     public float SideAmmo;
@@ -20,19 +21,40 @@ public class Weapon : MonoBehaviour
     public GameObject bulletPrefab;
     public FiringMode firingMode;
     private float FireTime;
+    public LayerMask DamageMask;
 
     public virtual void Fire()
     {
         if (FireTime <= Time.time)
         {
             //on = true;
-            /*            if (Physics.Raycast(FirePoint.position, FirePoint.forward, out RaycastHit hit, MaxDistance))
-                        {
-                            Debug.Log("Fire: hitName :" + hit.transform.name);
-                            Debug.Log("Fire: hitTag :" + (hit.transform.tag));
-                        }*/
+            if (Physics.Raycast(FirePoint.position, FirePoint.forward, out RaycastHit hit, MaxDistance, DamageMask))
+            {
+                Debug.Log("Fire: hitName :" + hit.transform.name);
+                Debug.Log("Fire: hitTag :" + (hit.transform.tag));
 
-            Instantiate(bulletPrefab,FirePoint.position,FirePoint.rotation);
+                var tag = hit.transform.tag;
+                float damage = 0;
+                if (tag.Contains("Player"))
+                {
+                    Debug.Log(hit.transform.tag);
+
+                    if (hit.transform.CompareTag("PlayerHead"))
+                    {
+                        damage = HeadDamage;
+
+                    }
+                    else if (hit.transform.CompareTag("PlayerBody"))
+                    {
+                        damage = BodyDamage;
+                    }
+                    if (hit.transform.GetComponentInParent<Health>().TakeDamage(damage))
+                        Destroy(hit.transform.gameObject);// got a kill
+                }
+
+            }
+
+            Instantiate(bulletPrefab, FirePoint.position, FirePoint.rotation).GetComponent<Bullet_Prototype>();
             CurrentAmmo--;
             FireTime = Time.time + FireRate;
         }
