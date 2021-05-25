@@ -11,7 +11,10 @@ public class Health : MonoBehaviour
         return CurrentHealth <= 0;
     }
 
-    public void Die() => Destroy(this.gameObject);
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
 
     public void AddHealth(float amount) => CurrentHealth = CurrentHealth + amount >= MaxHealth ? MaxHealth : CurrentHealth + amount;
 }

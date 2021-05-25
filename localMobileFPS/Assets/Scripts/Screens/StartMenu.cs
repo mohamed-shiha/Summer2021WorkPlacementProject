@@ -61,8 +61,8 @@ public class StartMenu : MonoBehaviour
 
     private void Singleton_OnClientConnectedCallback(ulong obj)
     {
-        GameManager.Instance.Players.Add(NetworkManager.Singleton.ConnectedClients[obj].PlayerObject.gameObject);
-        GameManager.Instance.LocalPlayer = NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.LocalClientId].PlayerObject.gameObject;
+        //GameManager.Instance.Players.Add(NetworkManager.Singleton.ConnectedClients[obj].PlayerObject.gameObject);
+        //GameManager.Instance.LocalPlayer = NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.LocalClientId].PlayerObject.gameObject;
         ShowScreen(ScreenNames.Lobby);
         OnTeamSelected(0);
     }

@@ -31,14 +31,17 @@ public class FirstPersonController : NetworkBehaviour
 
     //the character component to move the player
     CharacterController cc;
+    Canvas HUD;
     PlayerAnimationController animationController;
 
     private void Start()
     {
         cameraTransform = GetComponentInChildren<Camera>().transform;
+        HUD = GetComponentInChildren<Canvas>();
+        HUD.gameObject.SetActive(false);
 
-/*        cc = GetComponent<CharacterController>();
-        animationController = GetComponent<PlayerAnimationController>();*/
+        /*        cc = GetComponent<CharacterController>();
+                animationController = GetComponent<PlayerAnimationController>();*/
 
         if (IsLocalPlayer)
         {
@@ -54,16 +57,18 @@ public class FirstPersonController : NetworkBehaviour
         }
     }
 
-    public void OnStateChanged(PlayerState oldState,PlayerState newState)
+    public void OnStateChanged(PlayerState oldState, PlayerState newState)
     {
         switch (newState)
         {
             case PlayerState.Lobby:
                 cameraTransform.gameObject.SetActive(false);
+                HUD.gameObject.SetActive(false);
                 PlayMode = false;
                 break;
             case PlayerState.InGame:
                 cameraTransform.gameObject.SetActive(true);
+                HUD.gameObject.SetActive(true);
                 PlayMode = true;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;

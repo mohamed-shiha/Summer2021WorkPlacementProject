@@ -51,6 +51,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Image
     - UnityEngine.UI.LayoutElement
     - UnityEngine.UI.Mask
+    - UnityEngine.UI.RawImage
     - UnityEngine.UI.RectMask2D
     - UnityEngine.UI.ScrollRect
     - UnityEngine.UI.Scrollbar
@@ -127,6 +128,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 1672}
     - Class: 114
       Script: {instanceID: 2034}
+    - Class: 114
+      Script: {instanceID: 2154}
     - Class: 114
       Script: {instanceID: 2316}
     - Class: 114
@@ -718,7 +721,7 @@ ScriptsOnlyBuild:
     className: Toggle
   - hash:
       serializedVersion: 2
-      Hash: c4c721ead44ae29d08a05c80d9d2b704
+      Hash: 26c75ec74076213e0e70c97cd400d9a2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerAttack
@@ -820,7 +823,7 @@ ScriptsOnlyBuild:
     className: EnumerableTestState
   - hash:
       serializedVersion: 2
-      Hash: d2518959153d0a7ea2689416c03c9e07
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -1054,7 +1057,7 @@ ScriptsOnlyBuild:
     className: ScrollRect
   - hash:
       serializedVersion: 2
-      Hash: cf5b0113bfd21413fa3ea290df00d3f6
+      Hash: 3f6a3884a279477e87d8cc41608030eb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Weapon

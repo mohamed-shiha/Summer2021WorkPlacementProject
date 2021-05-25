@@ -1,13 +1,28 @@
 using System.Collections.Generic;
 using System.Linq;
+using MLAPI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public List<GameObject> Players;
-    public GameObject LocalPlayer;
+    public List<GameObject> Players
+    {
+        get
+        {
+            return NetworkManager.Singleton.ConnectedClients.Values
+                .Select(v => v.PlayerObject.gameObject).ToList();
+        }
+    }
+    public GameObject LocalPlayer
+    {
+        get
+        {
+            return NetworkManager.Singleton.ConnectedClients
+                [NetworkManager.Singleton.LocalClientId].PlayerObject.gameObject;
+        }
+    }
     private void Awake()
     {
         if (GameManager.Instance == null)
@@ -35,25 +50,38 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PlayerdDide()
+    {
+
+    }
+
     private void SetPlayersLocations()
     {
+
+        //var players = NetworkManager.Singleton.ConnectedClients.Values.Select(v => v.PlayerObject.gameObject);
+
         var points = FindObjectsOfType<SpawnPoint>();
+        GiveNewLocation(points, LocalPlayer);
         foreach (var player in Players)
         {
-            var playerTeam = player.GetComponent<PlayerData>().Team;
-            if (playerTeam == LocalPlayer.GetComponent<PlayerData>().Team)
-            {
-                Setlayer(player, LayerMask.NameToLayer("Friendly"));
-            }
-            player.transform.position = points.First(p => p.Team == playerTeam).GetNewPosition();
-            player.GetComponent<PlayerController_prototype>().State = PlayerState.InGame;
+            GiveNewLocation(points, player);
             //Debug.Log($"Player: {player.name} is in pos: {player.transform.position}");
         }
     }
 
+    private void GiveNewLocation(SpawnPoint[] points, GameObject player)
+    {
+        var playerTeam = player.GetComponent<PlayerData>().Team;
+        if (playerTeam == LocalPlayer.GetComponent<PlayerData>().Team)
+        {
+            Setlayer(player, LayerMask.NameToLayer("Friendly"));
+        }
+        player.transform.position = points.First(p => p.Team == playerTeam).GetNewPosition();
+        player.GetComponent<PlayerController_prototype>().State = PlayerState.InGame;
+    }
+
     private void Setlayer(GameObject gObject, LayerMask layer)
     {
-
         gObject.layer = layer;
         for (int i = 0; i < gObject.transform.childCount; i++)
         {

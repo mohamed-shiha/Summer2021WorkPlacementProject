@@ -17,7 +17,9 @@ public class Weapon : MonoBehaviour
     public float FireRate;
     public float ReloadTime;
     public float MaxDistance;
-    public Transform FirePoint;
+    Transform FirePoint;
+    public Transform HipFirePoint;
+    public Transform ADSFirePoint;
     public GameObject bulletPrefab;
     public FiringMode firingMode;
     private float FireTime;
@@ -45,13 +47,14 @@ public class Weapon : MonoBehaviour
                     {
                         damage = BodyDamage;
                     }
-                    if (hit.transform.GetComponentInParent<Health>().TakeDamage(damage))
-                        Destroy(hit.transform.gameObject);// got a kill
+                    var health = hit.transform.GetComponentInParent<Health>();
+                    if (health.TakeDamage(damage))
+                        health.Die();// got a kill
                 }
 
             }
 
-            Instantiate(bulletPrefab, FirePoint.position, FirePoint.rotation).GetComponent<Bullet_Prototype>();
+            Instantiate(bulletPrefab, FirePoint.position, FirePoint.rotation);
             CurrentAmmo--;
             FireTime = Time.time + FireRate;
         }
@@ -76,5 +79,10 @@ public class Weapon : MonoBehaviour
                 SideAmmo = 0;
             }
         }
+    }
+
+    public void SwitchADS(bool isAds)
+    {
+       FirePoint = isAds? ADSFirePoint: HipFirePoint;
     }
 }
