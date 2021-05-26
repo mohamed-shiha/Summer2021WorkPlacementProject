@@ -1,77 +1,67 @@
-﻿using MLAPI;
+﻿using System;
+using MLAPI;
+using MLAPI.Messaging;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class FirstPersonController : NetworkBehaviour
 {
-    /// <summary>
-    /// Move the player character controller based on horizontal and vertical axis input
-    /// </summary>
-
-    public bool PlayMode = false;
-    float yVelocity = 0f;
-    [Range(5f, 25f)]
-    public float gravity = 15f;
-    //the speed of the player movement
-    [Range(5f, 15f)]
-    public float movementSpeed = 10f;
-    //jump speed
-    [Range(5f, 15f)]
-    public float jumpSpeed = 10f;
-
-    //now the camera so we can move it up and down
     Transform cameraTransform;
-    float pitch = 0f;
-    [Range(1f, 90f)]
-    public float maxPitch = 85f;
-    [Range(-1f, -90f)]
-    public float minPitch = -85f;
-    [Range(0.5f, 5f)]
-    public float mouseSensitivity = 2f;
-
-    //the character component to move the player
+    PlayerData PlayerData;
     CharacterController cc;
     Canvas HUD;
-    PlayerAnimationController animationController;
-
+    PlayerAttack PlayerAttack;
+    Health PlayerHealth;
     private void Start()
     {
         cameraTransform = GetComponentInChildren<Camera>().transform;
         HUD = GetComponentInChildren<Canvas>();
+        PlayerData = GetComponent<PlayerData>();
+        PlayerAttack = GetComponent<PlayerAttack>();
+        cc = GetComponent<CharacterController>();
+        PlayerHealth = GetComponent<Health>();
+
         HUD.gameObject.SetActive(false);
+        PlayerHealth.PlayerOutOfHealth += PlayerOutOfHealth;
+        PlayerData.OnStateChanged += OnStateChanged;
+        PlayerData.State = PlayerState.Lobby;
 
-        /*        cc = GetComponent<CharacterController>();
-                animationController = GetComponent<PlayerAnimationController>();*/
-
-        if (IsLocalPlayer)
+/*        if (!IsLocalPlayer)
         {
-            cc = GetComponent<CharacterController>();
-            animationController = GetComponent<PlayerAnimationController>();
-            GetComponent<PlayerController_prototype>().OnStateChanged += OnStateChanged;
-            GetComponent<PlayerController_prototype>().State = PlayerState.Lobby;
         }
         else
         {
             cameraTransform.GetComponent<AudioListener>().enabled = false;
             cameraTransform.GetComponent<Camera>().enabled = false;
-        }
+        }*/
+    }
+
+    private void PlayerOutOfHealth()
+    {
+        Debug.Log("FPC : player has no health ");
+        SpawnManager.Instance.GiveNewLocation(gameObject);
+        PlayerHealth.CurrentHealth.Value = 100;
     }
 
     public void OnStateChanged(PlayerState oldState, PlayerState newState)
     {
+        Debug.Log("State changed "+newState);
         switch (newState)
         {
             case PlayerState.Lobby:
                 cameraTransform.gameObject.SetActive(false);
                 HUD.gameObject.SetActive(false);
-                PlayMode = false;
+                PlayerData.PlayMode = false;
+                PlayerAttack.PlayMode = false;
                 break;
             case PlayerState.InGame:
                 cameraTransform.gameObject.SetActive(true);
                 HUD.gameObject.SetActive(true);
-                PlayMode = true;
+                PlayerData.PlayMode = true;
+                PlayerAttack.PlayMode = true;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+                //SpawnManager.Instance.GiveNewLocation_ServerRpc(gameObject);
                 break;
             case PlayerState.Dead:
                 break;
@@ -88,7 +78,7 @@ public class FirstPersonController : NetworkBehaviour
         if (!IsLocalPlayer)
             return;
 
-        if (PlayMode)
+        if (PlayerData.PlayMode)
         {
             Look();
             Move();
@@ -99,15 +89,15 @@ public class FirstPersonController : NetworkBehaviour
     void Look()
     {
         //get the mouse input axis values
-        float xInput = Input.GetAxis("Mouse X") * mouseSensitivity;
-        float yInput = Input.GetAxis("Mouse Y") * mouseSensitivity;
+        float xInput = Input.GetAxis("Mouse X") * PlayerData.mouseSensitivity;
+        float yInput = Input.GetAxis("Mouse Y") * PlayerData.mouseSensitivity;
         //turn the whole object based on the x input
         transform.Rotate(0, xInput, 0);
         //now add on y input to pitch, and clamp it
-        pitch -= yInput;
-        pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
+        PlayerData.pitch -= yInput;
+        PlayerData.pitch = Mathf.Clamp(PlayerData.pitch, PlayerData.minPitch, PlayerData.maxPitch);
         //create the local rotation value for the camera and set it
-        Quaternion rot = Quaternion.Euler(pitch, 0, 0);
+        Quaternion rot = Quaternion.Euler(PlayerData.pitch, 0, 0);
         cameraTransform.localRotation = rot;
     }
 
@@ -117,7 +107,7 @@ public class FirstPersonController : NetworkBehaviour
         Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         input = Vector3.ClampMagnitude(input, 1f);
         //transform it based off the player transform and scale it by movement speed
-        Vector3 move = transform.TransformVector(input) * movementSpeed;
+        Vector3 move = transform.TransformVector(input) * PlayerData.movementSpeed;
 
         // play animation 
         //animationController.StartWalkingAnimation(input.z != 0);
@@ -125,21 +115,27 @@ public class FirstPersonController : NetworkBehaviour
         //is it on the ground
         if (cc.isGrounded)
         {
-            yVelocity = -gravity * Time.deltaTime;
+            PlayerData.yVelocity = -PlayerData.gravity * Time.deltaTime;
             //check for jump here
             if (Input.GetButtonDown("Jump"))
             {
-                yVelocity = jumpSpeed;
+                PlayerData.yVelocity = PlayerData.jumpSpeed;
             }
         }
         //add the gravity to the Y velocity
-        yVelocity -= gravity * Time.deltaTime;
-        move.y = yVelocity;
+        PlayerData.yVelocity -= PlayerData.gravity * Time.deltaTime;
+        move.y = PlayerData.yVelocity;
 
         //Apply movement
         cc.Move(move * Time.deltaTime);
     }
 
-
+    [ClientRpc]
+    public void RespawnClientRpc(Vector3 newPos)
+    {
+        cc.enabled = false;
+        transform.position = newPos;
+        cc.enabled = true;
+    }
 
 }

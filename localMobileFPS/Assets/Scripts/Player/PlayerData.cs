@@ -1,14 +1,54 @@
+using System;
 using MLAPI;
 using MLAPI.Messaging;
 using MLAPI.NetworkVariable;
 using UnityEngine;
 
+public enum PlayerState
+{
+    Lobby,
+    InGame,
+    Dead,
+    PreGame
+}
+
 public class PlayerData : NetworkBehaviour
 {
-
+    public Action<PlayerState, PlayerState> OnStateChanged;
+    public PlayerState State
+    {
+        get { return _State; }
+        set
+        {
+            OnStateChanged?.Invoke(_State, value);
+            _State = value;
+        }
+    }
+    private PlayerState _State;
     public Teams Team;
     public SkinnedMeshRenderer Renderer;
     public MeshRenderer _Renderer;
+    public bool PlayMode = false;
+    public float yVelocity = 0f;
+    [Range(5f, 25f)]
+    public float gravity = 15f;
+    //the speed of the player movement
+    [Range(5f, 15f)]
+    public float movementSpeed = 10f;
+    //jump speed
+    [Range(5f, 15f)]
+    public float jumpSpeed = 10f;
+
+    //now the camera so we can move it up and down
+    
+    public float pitch = 0f;
+    [Range(1f, 90f)]
+    public float maxPitch = 85f;
+    [Range(-1f, -90f)]
+    public float minPitch = -85f;
+    [Range(0.5f, 5f)]
+    public float mouseSensitivity = 2f;
+
 
     // Testing
     //public Canvas _Canvas;

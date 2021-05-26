@@ -9,9 +9,9 @@ ScriptsOnlyBuild:
     - LookAtTransform
     - PlayScreen
     - PlayerAttack
-    - PlayerController_prototype
     - PlayerData
     - SelfDestruct
+    - SpawnManager
     - SpawnPoint
     - StartMenu
     - Weapon
@@ -82,7 +82,7 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 3936}
+      Script: {instanceID: 3938}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -123,81 +123,81 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1532}
     - Class: 114
-      Script: {instanceID: 1644}
+      Script: {instanceID: 1546}
     - Class: 114
-      Script: {instanceID: 1672}
+      Script: {instanceID: 1646}
     - Class: 114
-      Script: {instanceID: 2034}
+      Script: {instanceID: 1674}
     - Class: 114
-      Script: {instanceID: 2154}
+      Script: {instanceID: 2036}
     - Class: 114
-      Script: {instanceID: 2316}
+      Script: {instanceID: 2156}
     - Class: 114
-      Script: {instanceID: 2408}
+      Script: {instanceID: 2318}
     - Class: 114
-      Script: {instanceID: 2418}
+      Script: {instanceID: 2410}
     - Class: 114
-      Script: {instanceID: 2590}
+      Script: {instanceID: 2420}
     - Class: 114
-      Script: {instanceID: 2842}
+      Script: {instanceID: 2592}
     - Class: 114
-      Script: {instanceID: 2996}
+      Script: {instanceID: 2844}
     - Class: 114
-      Script: {instanceID: 3466}
+      Script: {instanceID: 2998}
     - Class: 114
-      Script: {instanceID: 3520}
+      Script: {instanceID: 3522}
     - Class: 114
-      Script: {instanceID: 3714}
+      Script: {instanceID: 3716}
     - Class: 114
-      Script: {instanceID: 3728}
+      Script: {instanceID: 3730}
     - Class: 114
-      Script: {instanceID: 3828}
+      Script: {instanceID: 3830}
     - Class: 114
-      Script: {instanceID: 3918}
+      Script: {instanceID: 3920}
     - Class: 114
-      Script: {instanceID: 3952}
+      Script: {instanceID: 3954}
     - Class: 114
-      Script: {instanceID: 4392}
+      Script: {instanceID: 4394}
     - Class: 114
-      Script: {instanceID: 4442}
+      Script: {instanceID: 4444}
     - Class: 114
-      Script: {instanceID: 4452}
+      Script: {instanceID: 4454}
     - Class: 114
-      Script: {instanceID: 4562}
+      Script: {instanceID: 4564}
     - Class: 114
-      Script: {instanceID: 4566}
+      Script: {instanceID: 4568}
     - Class: 114
-      Script: {instanceID: 4604}
+      Script: {instanceID: 4606}
     - Class: 114
-      Script: {instanceID: 5058}
+      Script: {instanceID: 5060}
     - Class: 114
-      Script: {instanceID: 5074}
+      Script: {instanceID: 5076}
     - Class: 114
-      Script: {instanceID: 5212}
-    - Class: 114
-      Script: {instanceID: 5228}
+      Script: {instanceID: 5214}
     - Class: 114
       Script: {instanceID: 5230}
     - Class: 114
-      Script: {instanceID: 5494}
+      Script: {instanceID: 5232}
     - Class: 114
-      Script: {instanceID: 5502}
+      Script: {instanceID: 5496}
     - Class: 114
-      Script: {instanceID: 5520}
+      Script: {instanceID: 5504}
     - Class: 114
-      Script: {instanceID: 5880}
+      Script: {instanceID: 5522}
     - Class: 114
-      Script: {instanceID: 6128}
+      Script: {instanceID: 5882}
     - Class: 114
-      Script: {instanceID: 6204}
+      Script: {instanceID: 6130}
     - Class: 114
-      Script: {instanceID: 6270}
+      Script: {instanceID: 6206}
     - Class: 114
-      Script: {instanceID: 6454}
+      Script: {instanceID: 6272}
     - Class: 114
-      Script: {instanceID: 6608}
+      Script: {instanceID: 6456}
     - Class: 114
-      Script: {instanceID: 6898}
+      Script: {instanceID: 6610}
+    - Class: 114
+      Script: {instanceID: 6900}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -233,6 +233,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Image
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SpawnManager
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -559,12 +565,6 @@ ScriptsOnlyBuild:
     className: UnityOnPointerExitMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: PlayerController_prototype
-  - hash:
-      serializedVersion: 2
       Hash: aba7b2852ef61d175dd9602e7723d5e5
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -721,7 +721,7 @@ ScriptsOnlyBuild:
     className: Toggle
   - hash:
       serializedVersion: 2
-      Hash: 26c75ec74076213e0e70c97cd400d9a2
+      Hash: 09afc683ca480d77287b9eb903563e15
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerAttack
@@ -853,13 +853,13 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: d0849dab757e23ff20123324821763d1
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FirstPersonController
   - hash:
       serializedVersion: 2
-      Hash: 46f96d80d4fb717c3fdd042295dba0fc
+      Hash: cf16570eebf2531e251ca9ac7fb8b618
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Health
@@ -1105,7 +1105,7 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
-      Hash: 849b66593ba28129282e10cbe940ec56
+      Hash: dcd77daf8fc476109356edfd80a3308d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerData

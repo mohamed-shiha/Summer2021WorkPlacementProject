@@ -61,10 +61,7 @@ public class StartMenu : MonoBehaviour
 
     private void Singleton_OnClientConnectedCallback(ulong obj)
     {
-        //GameManager.Instance.Players.Add(NetworkManager.Singleton.ConnectedClients[obj].PlayerObject.gameObject);
-        //GameManager.Instance.LocalPlayer = NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.LocalClientId].PlayerObject.gameObject;
         ShowScreen(ScreenNames.Lobby);
-        OnTeamSelected(0);
     }
 
     private void Singleton_OnClientDisconnectCallback(ulong clientId)
@@ -125,7 +122,6 @@ public class StartMenu : MonoBehaviour
         ShowScreen(ScreenNames.Settings);
     }
 
-
     public void SaveAndExit()
     {
         Application.Quit();
@@ -160,7 +156,6 @@ public class StartMenu : MonoBehaviour
         NetworkManager.Singleton.StartClient();
     }
 
-
     public void StartAsHost()
     {
         ReadyPlayButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start Match";
@@ -173,13 +168,15 @@ public class StartMenu : MonoBehaviour
 
     public void OnTeamSelected(int index)
     {
+        if (!ReadyPlayButton.enabled)
+            ReadyPlayButton.enabled = true;
+        if (!NetworkManager.Singleton.IsHost)
+            GameManager.Instance.LocalPlayer.GetComponent<PlayerData>()._SetReadyServerRpc(false);
         Teams team = (Teams)index;
         GameManager.Instance.LocalPlayer.GetComponent<PlayerData>()._SetTeamServerRpc(team);
         // if (NetworkManager.Singleton.IsHost)
-        GameManager.Instance.LocalPlayer.GetComponent<PlayerData>().LocalSetTeam(team);
+        //GameManager.Instance.LocalPlayer.GetComponent<PlayerData>().LocalSetTeam(team);
     }
-
-
 
     private void ShowScreen(ScreenNames screen)
     {

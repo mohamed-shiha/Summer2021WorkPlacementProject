@@ -1,3 +1,4 @@
+using MLAPI.Messaging;
 using UnityEngine;
 
 public enum FiringMode
@@ -17,14 +18,18 @@ public class Weapon : MonoBehaviour
     public float FireRate;
     public float ReloadTime;
     public float MaxDistance;
-    Transform FirePoint;
+
     public Transform HipFirePoint;
     public Transform ADSFirePoint;
     public GameObject bulletPrefab;
     public FiringMode firingMode;
-    private float FireTime;
     public LayerMask DamageMask;
 
+    private float FireTime;
+    Transform FirePoint;
+
+
+    //[ServerRpc]
     public virtual void Fire()
     {
         if (FireTime <= Time.time)

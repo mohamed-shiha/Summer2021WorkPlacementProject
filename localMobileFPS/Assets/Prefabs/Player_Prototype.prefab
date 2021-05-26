@@ -724,7 +724,6 @@ GameObject:
   - component: {fileID: 965511567931856453}
   - component: {fileID: 6455892391600404778}
   - component: {fileID: 3608948219933925733}
-  - component: {fileID: 7479121931865286150}
   m_Layer: 3
   m_Name: Player_Prototype
   m_TagString: Untagged
@@ -778,8 +777,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f881026ad97464b9ab9429c78ea31e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 100
-  CurrentHealth: 100
+  MaxHealth:
+    m_InternalValue: 0
+  CurrentHealth:
+    m_InternalValue: 0
 --- !u!114 &732727125385745443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -876,6 +877,15 @@ MonoBehaviour:
   Team: 0
   Renderer: {fileID: 0}
   _Renderer: {fileID: 965511567814119480}
+  PlayMode: 0
+  yVelocity: 0
+  gravity: 15
+  movementSpeed: 10
+  jumpSpeed: 10
+  pitch: 0
+  maxPitch: 85
+  minPitch: -85
+  mouseSensitivity: 2
   Ready:
     m_InternalValue: 0
 --- !u!114 &3608948219933925733
@@ -888,25 +898,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75773a9e7fe83d2479dea1b0917cf7c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayMode: 0
-  gravity: 15
-  movementSpeed: 10
-  jumpSpeed: 10
-  maxPitch: 85
-  minPitch: -85
-  mouseSensitivity: 2
---- !u!114 &7479121931865286150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 965511567931856457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b535b2c362bc6e348b67c03dbbaad21a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &965511567936127932

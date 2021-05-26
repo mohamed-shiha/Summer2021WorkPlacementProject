@@ -1,20 +1,25 @@
+using System;
+using MLAPI;
+using MLAPI.NetworkVariable;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class Health : NetworkBehaviour
 {
-    public float MaxHealth;
-    public float CurrentHealth;
-    
+
+    public NetworkVariableFloat MaxHealth = new NetworkVariableFloat(100);
+    public NetworkVariableFloat CurrentHealth = new NetworkVariableFloat(100);
+    public Action PlayerOutOfHealth;
     public bool TakeDamage(float amount)
     {
-        CurrentHealth -= amount;
-        return CurrentHealth <= 0;
+        CurrentHealth.Value -= amount;
+        return CurrentHealth.Value <= 0;
     }
 
     public void Die()
     {
-        Destroy(gameObject);
+        Debug.Log("Player has no health");
+        PlayerOutOfHealth?.Invoke();
     }
 
-    public void AddHealth(float amount) => CurrentHealth = CurrentHealth + amount >= MaxHealth ? MaxHealth : CurrentHealth + amount;
+    public void AddHealth(float amount) => CurrentHealth.Value = CurrentHealth.Value + amount >= MaxHealth.Value ? MaxHealth.Value : CurrentHealth.Value + amount;
 }

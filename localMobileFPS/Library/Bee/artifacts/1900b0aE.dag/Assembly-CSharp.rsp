@@ -332,12 +332,12 @@
 "Assets/Scripts/Player/Weapon.cs"
 "Assets/Scripts/Prototype/Bullet_Prototype.cs"
 "Assets/Scripts/Prototype/PlayerAttack_prototype.cs"
-"Assets/Scripts/Prototype/PlayerController_prototype.cs"
 "Assets/Scripts/Prototype/PlayerMovement_Prototype.cs"
 "Assets/Scripts/Prototype/SelfDestruct.cs"
 "Assets/Scripts/Screens/PlayScreen.cs"
 "Assets/Scripts/Screens/StartMenu.cs"
 "Assets/Scripts/Spawning/SpawnPoint.cs"
+"Assets/Scripts/SpawnManager.cs"
 -langversion:8.0
 
 /deterministic
