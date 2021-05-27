@@ -27,7 +27,7 @@ public class PlayerAttack : NetworkBehaviour
 
         if (!PlayMode)
             return;
-
+        else return;
         //Debug.Log("in update attack");
         switch (CurrentWeapon.firingMode)
         {
@@ -48,12 +48,25 @@ public class PlayerAttack : NetworkBehaviour
         if (Input.GetKeyUp(KeyCode.R))
             Reload();
 
-        var ads = Input.GetMouseButton(1); 
+        SwicthADSServerRpc(Input.GetMouseButton(1));
+
+    }
+
+
+    [ServerRpc]
+    public void SwicthADSServerRpc(bool ads)
+    {
+        SwicthADSClientRpc( ads);
+    }
+
+    [ClientRpc]
+    public void SwicthADSClientRpc(bool ads)
+    {
+        
         // this needs to be done using animations
         CurrentWeapon.transform.parent = ads ? ADSPos : HipPos;
         CurrentWeapon.transform.localPosition = Vector3.zero;
-        CurrentWeapon.SwitchADS(ads);
-
+        CurrentWeapon.SwitchADSClientRpc(ads);
     }
 
     //[ServerRpc]

@@ -84,7 +84,7 @@ public class SpawnManager : MonoBehaviour
 
     public void GiveNewLocationAfterDeath(GameObject player)
     {
-        Debug.Log("New location to be given to the player " + player.name);
+        //Debug.Log("New location to be given to the player " + player.name);
         var playerTeam = player.GetComponent<PlayerData>().Team;
         var pos = points[Random.Range(0,points.Length-1)].GetNewPosition();
         player.GetComponent<FirstPersonController>().RespawnClientRpc(pos);

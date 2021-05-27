@@ -120,14 +120,13 @@ MonoBehaviour:
   FireRate: 0.1
   ReloadTime: 0.5
   MaxDistance: 1500
-  FirePoint: {fileID: 0}
   HipFirePoint: {fileID: 339109333360414060}
   ADSFirePoint: {fileID: 2221825554525781609}
   bulletPrefab: {fileID: 5210526474173734131, guid: a53a1a378d5dae24b942fdedd80a9b92, type: 3}
   firingMode: 0
   DamageMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 328
 --- !u!1 &2221825553924979422
 GameObject:
   m_ObjectHideFlags: 0

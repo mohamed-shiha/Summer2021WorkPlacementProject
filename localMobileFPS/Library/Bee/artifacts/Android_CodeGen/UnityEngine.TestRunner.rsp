@@ -24,8 +24,6 @@
 -define:UNITY_2020_2_OR_NEWER
 -define:UNITY_2020_3_OR_NEWER
 -define:UNITY_2021_1_OR_NEWER
--define:PLATFORM_ARCH_64
--define:UNITY_64
 -define:UNITY_INCLUDE_TESTS
 -define:USE_SEARCH_ENGINE_API
 -define:USE_QUICK_SEARCH_MODULE
@@ -39,7 +37,6 @@
 -define:ENABLE_MULTIPLE_DISPLAYS
 -define:ENABLE_PHYSICS
 -define:ENABLE_TEXTURE_STREAMING
--define:ENABLE_VIRTUALTEXTURING
 -define:ENABLE_UNET
 -define:ENABLE_LZMA
 -define:ENABLE_UNITYEVENTS
@@ -53,6 +50,7 @@
 -define:ENABLE_CLOUD_SERVICES_ADS
 -define:ENABLE_CLOUD_SERVICES_USE_WEBREQUEST
 -define:ENABLE_CLOUD_SERVICES_CRASH_REPORTING
+-define:ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING
 -define:ENABLE_CLOUD_SERVICES_PURCHASING
 -define:ENABLE_CLOUD_SERVICES_ANALYTICS
 -define:ENABLE_CLOUD_SERVICES_UNET
@@ -66,26 +64,32 @@
 -define:ENABLE_MANAGED_TRANSFORM_JOBS
 -define:ENABLE_MANAGED_ANIMATION_JOBS
 -define:ENABLE_MANAGED_AUDIO_JOBS
+-define:ENABLE_RUNTIME_PERMISSIONS
+-define:ENABLE_ENGINE_CODE_STRIPPING
+-define:ENABLE_ONSCREEN_KEYBOARD
 -define:INCLUDE_DYNAMIC_GI
 -define:ENABLE_MONO_BDWGC
 -define:ENABLE_SCRIPTING_GC_WBARRIERS
 -define:PLATFORM_SUPPORTS_MONO
--define:RENDER_SOFTWARE_CURSOR
 -define:ENABLE_VIDEO
--define:PLATFORM_STANDALONE
--define:PLATFORM_STANDALONE_WIN
--define:UNITY_STANDALONE_WIN
--define:UNITY_STANDALONE
--define:ENABLE_RUNTIME_GI
--define:ENABLE_MOVIES
+-define:PLATFORM_ANDROID
+-define:UNITY_ANDROID
+-define:UNITY_ANDROID_API
+-define:ENABLE_EGL
 -define:ENABLE_NETWORK
+-define:ENABLE_RUNTIME_GI
 -define:ENABLE_CRUNCH_TEXTURE_COMPRESSION
--define:ENABLE_OUT_OF_PROCESS_CRASH_HANDLER
--define:ENABLE_CLUSTER_SYNC
--define:ENABLE_CLUSTERINPUT
+-define:UNITY_CAN_SHOW_SPLASH_SCREEN
+-define:UNITY_HAS_GOOGLEVR
+-define:UNITY_HAS_TANGO
+-define:ENABLE_SPATIALTRACKING
+-define:ENABLE_ETC_COMPRESSION
+-define:PLATFORM_EXTENDS_VULKAN_DEVICE
+-define:PLATFORM_HAS_MULTIPLE_SWAPCHAINS
+-define:UNITY_ANDROID_SUPPORTS_SHADOWFILES
 -define:PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP
--define:GFXDEVICE_WAITFOREVENT_MESSAGEPUMP
--define:ENABLE_WEBSOCKET_HOST
+-define:ENABLE_UNITYADS_RUNTIME
+-define:UNITY_UNITYADS_API
 -define:ENABLE_MONO
 -define:NET_STANDARD_2_0
 -define:ENABLE_PROFILER
@@ -129,8 +133,6 @@
 -r:"C:/Program Files/Unity/Hub/Editor/2021.1.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.AssetBundleModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.1.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.AudioModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.1.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.ClothModule.dll"
--r:"C:/Program Files/Unity/Hub/Editor/2021.1.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterInputModule.dll"
--r:"C:/Program Files/Unity/Hub/Editor/2021.1.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterRendererModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.1.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.1.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.CrashReportingModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.1.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.DirectorModule.dll"
@@ -182,7 +184,6 @@
 -r:"C:/Program Files/Unity/Hub/Editor/2021.1.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.VehiclesModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.1.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.VFXModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.1.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.VideoModule.dll"
--r:"C:/Program Files/Unity/Hub/Editor/2021.1.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.VirtualTexturingModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.1.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.VRModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.1.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.WindModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.1.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll"

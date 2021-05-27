@@ -288,6 +288,11 @@
 -r:"Library/Bee/artifacts/1300b0aP.dag/Unity.VisualScripting.Flow.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aP.dag/Unity.VisualScripting.State.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aP.dag/UnityEngine.UI.ref.dll"
+"Assets/Joystick Pack/Scripts/Base/Joystick.cs"
+"Assets/Joystick Pack/Scripts/Joysticks/DynamicJoystick.cs"
+"Assets/Joystick Pack/Scripts/Joysticks/FixedJoystick.cs"
+"Assets/Joystick Pack/Scripts/Joysticks/FloatingJoystick.cs"
+"Assets/Joystick Pack/Scripts/Joysticks/VariableJoystick.cs"
 "Assets/Scripts/DataManager.cs"
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/LookAtTransform.cs"
@@ -299,12 +304,12 @@
 "Assets/Scripts/Player/Weapon.cs"
 "Assets/Scripts/Prototype/Bullet_Prototype.cs"
 "Assets/Scripts/Prototype/PlayerAttack_prototype.cs"
-"Assets/Scripts/Prototype/PlayerController_prototype.cs"
 "Assets/Scripts/Prototype/PlayerMovement_Prototype.cs"
 "Assets/Scripts/Prototype/SelfDestruct.cs"
 "Assets/Scripts/Screens/PlayScreen.cs"
 "Assets/Scripts/Screens/StartMenu.cs"
 "Assets/Scripts/Spawning/SpawnPoint.cs"
+"Assets/Scripts/SpawnManager.cs"
 -langversion:8.0
 
 /deterministic

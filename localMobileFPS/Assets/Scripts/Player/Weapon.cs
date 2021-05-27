@@ -33,27 +33,6 @@ public class Weapon : NetworkBehaviour
     [ClientRpc]
     private void FireClientRpc()
     {
-        if (Physics.Raycast(FirePoint.position, FirePoint.forward, out RaycastHit hit, MaxDistance, DamageMask))
-        {
-            var tag = hit.transform.tag;
-            float damage = 0;
-            if (tag.Contains("Player"))
-            {
-                Debug.Log(hit.transform.tag);
-
-                if (hit.transform.CompareTag("PlayerHead"))
-                {
-                    damage = HeadDamage;
-
-                }
-                else if (hit.transform.CompareTag("PlayerBody"))
-                {
-                    damage = BodyDamage;
-                }
-
-            }
-
-        }
         Instantiate(bulletPrefab, FirePoint.position, FirePoint.rotation);
         CurrentAmmo--;
     }
@@ -63,9 +42,10 @@ public class Weapon : NetworkBehaviour
     private void FireServerRpc()
     {
         FireClientRpc();
-
-        if (Physics.Raycast(FirePoint.position, FirePoint.forward, out RaycastHit hit, MaxDistance))
+        if(Physics.SphereCast(FirePoint.position,0.5f ,FirePoint.forward, out RaycastHit hit, MaxDistance * 10, DamageMask))
+        //if (Physics.Raycast (FirePoint.position, FirePoint.forward, out RaycastHit hit,MaxDistance*10 ,DamageMask))
         {
+            Debug.Log("On Server" + hit.transform.tag);
             var tag = hit.transform.tag;
             if (tag.Contains("Player"))
             {
@@ -119,7 +99,6 @@ public class Weapon : NetworkBehaviour
 
     public void SwitchADS(bool isAds)
     {
-
         SwitchADSServerRpc(isAds);
     }
 

@@ -13,6 +13,9 @@ public class FirstPersonController : NetworkBehaviour
     PlayerAttack PlayerAttack;
     Health PlayerHealth;
 
+    public FixedJoystick LeftJoystick;
+    public FixedJoystick RightJoystick;
+
     private void Start()
     {
         cameraTransform = GetComponentInChildren<Camera>().transform;
@@ -26,11 +29,17 @@ public class FirstPersonController : NetworkBehaviour
         PlayerHealth.PlayerOutOfHealth += PlayerOutOfHealth;
         PlayerData.OnStateChanged += OnStateChanged;
         PlayerData.State = PlayerState.Lobby;
+
+        if (Application.platform == RuntimePlatform.WindowsPlayer)
+        {
+            RightJoystick.gameObject.SetActive(false);
+            LeftJoystick.gameObject.SetActive(false);
+        }
     }
 
     private void PlayerOutOfHealth()
     {
-        Debug.Log("FPC : player has no health ");
+        //Debug.Log("FPC : player has no health ");
         SpawnManager.Instance.GiveNewLocationAfterDeath(gameObject);
         //RespawnClientRpc(Vector3.zero);
     }
@@ -56,8 +65,8 @@ public class FirstPersonController : NetworkBehaviour
                 HUD.gameObject.SetActive(true);
                 PlayerData.PlayMode = true;
                 PlayerAttack.PlayMode = true;
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                //Cursor.lockState = CursorLockMode.Locked;
+                //Cursor.visible = false;
                 //SpawnManager.Instance.GiveNewLocation_ServerRpc(gameObject);
                 break;
             case PlayerState.Dead:
@@ -86,8 +95,19 @@ public class FirstPersonController : NetworkBehaviour
     void Look()
     {
         //get the mouse input axis values
-        float xInput = Input.GetAxis("Mouse X") * PlayerData.mouseSensitivity;
-        float yInput = Input.GetAxis("Mouse Y") * PlayerData.mouseSensitivity;
+        float xInput = 0,yInput = 0;
+        if (Application.platform == RuntimePlatform.WindowsPlayer)
+        {
+            Debug.Log("In Windows");
+             xInput = Input.GetAxis("Mouse X") * PlayerData.mouseSensitivity;
+             yInput = Input.GetAxis("Mouse Y") * PlayerData.mouseSensitivity;
+
+        }else if(Application.platform == RuntimePlatform.Android)
+        {
+            Debug.Log("In Android");
+            xInput = RightJoystick.Horizontal * PlayerData.mouseSensitivity;
+             yInput = RightJoystick.Vertical * PlayerData.mouseSensitivity;
+        }
         //turn the whole object based on the x input
         transform.Rotate(0, xInput, 0);
         //now add on y input to pitch, and clamp it
@@ -101,7 +121,17 @@ public class FirstPersonController : NetworkBehaviour
     void Move()
     {
         //update speed based on the input
-        Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        Vector3 input = Vector3.zero;
+        if (Application.platform == RuntimePlatform.WindowsPlayer)
+        {
+             input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+        }
+        else if (Application.platform == RuntimePlatform.Android)
+        {
+            input = new Vector3(LeftJoystick.Horizontal, 0, LeftJoystick.Vertical);
+        }
+         //input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         input = Vector3.ClampMagnitude(input, 1f);
         //transform it based off the player transform and scale it by movement speed
         Vector3 move = transform.TransformVector(input) * PlayerData.movementSpeed;
@@ -144,7 +174,7 @@ public class FirstPersonController : NetworkBehaviour
     [ClientRpc]
     public void RespawnClientRpc(Vector3 newPos)
     {
-        Debug.Log("clientRPC: new location to the client");
+        //Debug.Log("clientRPC: new location to the client");
         cc.enabled = false;
         transform.position = newPos;
         cc.enabled = true;

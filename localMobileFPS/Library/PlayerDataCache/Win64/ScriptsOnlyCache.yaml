@@ -4,6 +4,7 @@ ScriptsOnlyBuild:
     - Bullet_Prototype
     - DataManager
     - FirstPersonController
+    - FixedJoystick
     - GameManager
     - Health
     - LookAtTransform
@@ -57,6 +58,8 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Toggle
     - UnityEngine.UI.VerticalLayoutGroup
+    projectCloner.dll:
+    - UnityProjectCloner.ProjectClonerWindow
   sceneClasses:
     Assets/Scenes/GamePlay.unity:
     - Class: 1
@@ -82,7 +85,7 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 3936}
+      Script: {instanceID: 3942}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -125,79 +128,81 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1546}
     - Class: 114
-      Script: {instanceID: 1646}
+      Script: {instanceID: 1648}
     - Class: 114
-      Script: {instanceID: 1674}
+      Script: {instanceID: 1676}
     - Class: 114
-      Script: {instanceID: 2036}
+      Script: {instanceID: 2038}
     - Class: 114
-      Script: {instanceID: 2156}
+      Script: {instanceID: 2158}
     - Class: 114
-      Script: {instanceID: 2318}
+      Script: {instanceID: 2320}
     - Class: 114
-      Script: {instanceID: 2410}
+      Script: {instanceID: 2414}
     - Class: 114
-      Script: {instanceID: 2420}
+      Script: {instanceID: 2424}
     - Class: 114
-      Script: {instanceID: 2592}
+      Script: {instanceID: 2598}
     - Class: 114
-      Script: {instanceID: 2844}
+      Script: {instanceID: 2850}
     - Class: 114
-      Script: {instanceID: 2998}
+      Script: {instanceID: 3004}
     - Class: 114
-      Script: {instanceID: 3520}
+      Script: {instanceID: 3526}
     - Class: 114
-      Script: {instanceID: 3714}
+      Script: {instanceID: 3720}
     - Class: 114
-      Script: {instanceID: 3728}
+      Script: {instanceID: 3734}
     - Class: 114
-      Script: {instanceID: 3828}
+      Script: {instanceID: 3834}
     - Class: 114
-      Script: {instanceID: 3918}
+      Script: {instanceID: 3924}
     - Class: 114
-      Script: {instanceID: 3952}
+      Script: {instanceID: 3958}
     - Class: 114
-      Script: {instanceID: 4392}
+      Script: {instanceID: 4398}
     - Class: 114
-      Script: {instanceID: 4442}
+      Script: {instanceID: 4448}
     - Class: 114
-      Script: {instanceID: 4452}
+      Script: {instanceID: 4458}
     - Class: 114
-      Script: {instanceID: 4562}
+      Script: {instanceID: 4568}
     - Class: 114
-      Script: {instanceID: 4566}
+      Script: {instanceID: 4572}
     - Class: 114
-      Script: {instanceID: 4604}
+      Script: {instanceID: 4610}
     - Class: 114
-      Script: {instanceID: 5058}
+      Script: {instanceID: 5064}
     - Class: 114
-      Script: {instanceID: 5074}
+      Script: {instanceID: 5080}
     - Class: 114
-      Script: {instanceID: 5212}
+      Script: {instanceID: 5218}
     - Class: 114
-      Script: {instanceID: 5228}
+      Script: {instanceID: 5234}
     - Class: 114
-      Script: {instanceID: 5230}
+      Script: {instanceID: 5236}
     - Class: 114
-      Script: {instanceID: 5494}
+      Script: {instanceID: 5500}
     - Class: 114
-      Script: {instanceID: 5502}
+      Script: {instanceID: 5508}
     - Class: 114
-      Script: {instanceID: 5520}
+      Script: {instanceID: 5526}
     - Class: 114
-      Script: {instanceID: 5880}
+      Script: {instanceID: 5886}
     - Class: 114
-      Script: {instanceID: 6128}
+      Script: {instanceID: 6134}
     - Class: 114
-      Script: {instanceID: 6204}
+      Script: {instanceID: 6210}
     - Class: 114
-      Script: {instanceID: 6270}
+      Script: {instanceID: 6276}
     - Class: 114
-      Script: {instanceID: 6454}
+      Script: {instanceID: 6460}
     - Class: 114
-      Script: {instanceID: 6608}
+      Script: {instanceID: 6614}
     - Class: 114
-      Script: {instanceID: 6898}
+      Script: {instanceID: 6904}
+    - Class: 114
+      Script: {instanceID: 34192}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -853,7 +858,7 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 5ed84cb83ba3d93b85e2ac2f158e8f5b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FirstPersonController
@@ -1139,6 +1144,36 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 824e8d4cb47ffd88ddf959dbd4526585
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DynamicJoystick
+  - hash:
+      serializedVersion: 2
+      Hash: ce669872a2be11bc686ea22961d8a3bb
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: FloatingJoystick
+  - hash:
+      serializedVersion: 2
+      Hash: 9dac16f3efc511835ac976dfae55f580
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: VariableJoystick
+  - hash:
+      serializedVersion: 2
+      Hash: ce669872a2be11bc686ea22961d8a3bb
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Joystick
+  - hash:
+      serializedVersion: 2
+      Hash: ce669872a2be11bc686ea22961d8a3bb
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: FixedJoystick
   platform: 19
   scenePathNames:
   - Assets/Scenes/MainMenu.unity

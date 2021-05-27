@@ -4,14 +4,15 @@ ScriptsOnlyBuild:
     - Bullet_Prototype
     - DataManager
     - FirstPersonController
+    - FixedJoystick
     - GameManager
     - Health
     - LookAtTransform
     - PlayScreen
     - PlayerAttack
-    - PlayerController_prototype
     - PlayerData
     - SelfDestruct
+    - SpawnManager
     - SpawnPoint
     - StartMenu
     - Weapon
@@ -57,6 +58,8 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Toggle
     - UnityEngine.UI.VerticalLayoutGroup
+    projectCloner.dll:
+    - UnityProjectCloner.ProjectClonerWindow
   sceneClasses:
     Assets/Scenes/GamePlay.unity:
     - Class: 1
@@ -82,7 +85,11 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 3936}
+      Script: {instanceID: 9366}
+    - Class: 114
+      Script: {instanceID: 10864}
+    - Class: 114
+      Script: {instanceID: 12410}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -121,83 +128,85 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1532}
+      Script: {instanceID: 8482}
     - Class: 114
-      Script: {instanceID: 1644}
+      Script: {instanceID: 8496}
     - Class: 114
-      Script: {instanceID: 1672}
+      Script: {instanceID: 8600}
     - Class: 114
-      Script: {instanceID: 2034}
+      Script: {instanceID: 8628}
     - Class: 114
-      Script: {instanceID: 2154}
+      Script: {instanceID: 8910}
     - Class: 114
-      Script: {instanceID: 2316}
+      Script: {instanceID: 8994}
     - Class: 114
-      Script: {instanceID: 2408}
+      Script: {instanceID: 9112}
     - Class: 114
-      Script: {instanceID: 2418}
+      Script: {instanceID: 9274}
     - Class: 114
-      Script: {instanceID: 2590}
+      Script: {instanceID: 9366}
     - Class: 114
-      Script: {instanceID: 2842}
+      Script: {instanceID: 9376}
     - Class: 114
-      Script: {instanceID: 2996}
+      Script: {instanceID: 9544}
     - Class: 114
-      Script: {instanceID: 3466}
+      Script: {instanceID: 9796}
     - Class: 114
-      Script: {instanceID: 3520}
+      Script: {instanceID: 9946}
     - Class: 114
-      Script: {instanceID: 3714}
+      Script: {instanceID: 10458}
     - Class: 114
-      Script: {instanceID: 3728}
+      Script: {instanceID: 10642}
     - Class: 114
-      Script: {instanceID: 3828}
+      Script: {instanceID: 10656}
     - Class: 114
-      Script: {instanceID: 3918}
+      Script: {instanceID: 10756}
     - Class: 114
-      Script: {instanceID: 3952}
+      Script: {instanceID: 10846}
     - Class: 114
-      Script: {instanceID: 4392}
+      Script: {instanceID: 10880}
     - Class: 114
-      Script: {instanceID: 4442}
+      Script: {instanceID: 11320}
     - Class: 114
-      Script: {instanceID: 4452}
+      Script: {instanceID: 11366}
     - Class: 114
-      Script: {instanceID: 4562}
+      Script: {instanceID: 11376}
     - Class: 114
-      Script: {instanceID: 4566}
+      Script: {instanceID: 11486}
     - Class: 114
-      Script: {instanceID: 4604}
+      Script: {instanceID: 11490}
     - Class: 114
-      Script: {instanceID: 5058}
+      Script: {instanceID: 11526}
     - Class: 114
-      Script: {instanceID: 5074}
+      Script: {instanceID: 11976}
     - Class: 114
-      Script: {instanceID: 5212}
+      Script: {instanceID: 11992}
     - Class: 114
-      Script: {instanceID: 5228}
+      Script: {instanceID: 12128}
     - Class: 114
-      Script: {instanceID: 5230}
+      Script: {instanceID: 12144}
     - Class: 114
-      Script: {instanceID: 5494}
+      Script: {instanceID: 12146}
     - Class: 114
-      Script: {instanceID: 5502}
+      Script: {instanceID: 12410}
     - Class: 114
-      Script: {instanceID: 5520}
+      Script: {instanceID: 12418}
     - Class: 114
-      Script: {instanceID: 5880}
+      Script: {instanceID: 12436}
     - Class: 114
-      Script: {instanceID: 6128}
+      Script: {instanceID: 12794}
     - Class: 114
-      Script: {instanceID: 6204}
+      Script: {instanceID: 13042}
     - Class: 114
-      Script: {instanceID: 6270}
+      Script: {instanceID: 13120}
     - Class: 114
-      Script: {instanceID: 6454}
+      Script: {instanceID: 13184}
     - Class: 114
-      Script: {instanceID: 6608}
+      Script: {instanceID: 13368}
     - Class: 114
-      Script: {instanceID: 6898}
+      Script: {instanceID: 13522}
+    - Class: 114
+      Script: {instanceID: 13806}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -233,6 +242,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Image
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SpawnManager
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -283,10 +298,22 @@ ScriptsOnlyBuild:
     className: UnityOnMouseExitMessageListener
   - hash:
       serializedVersion: 2
+      Hash: ce669872a2be11bc686ea22961d8a3bb
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: FixedJoystick
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnTriggerEnterMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 9dac16f3efc511835ac976dfae55f580
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: VariableJoystick
   - hash:
       serializedVersion: 2
       Hash: 800c50acba124432abb4cf0d47202e06
@@ -559,12 +586,6 @@ ScriptsOnlyBuild:
     className: UnityOnPointerExitMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: PlayerController_prototype
-  - hash:
-      serializedVersion: 2
       Hash: aba7b2852ef61d175dd9602e7723d5e5
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -697,6 +718,12 @@ ScriptsOnlyBuild:
     className: UnityOnEndDragMessageListener
   - hash:
       serializedVersion: 2
+      Hash: 824e8d4cb47ffd88ddf959dbd4526585
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DynamicJoystick
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
@@ -721,7 +748,7 @@ ScriptsOnlyBuild:
     className: Toggle
   - hash:
       serializedVersion: 2
-      Hash: c4c721ead44ae29d08a05c80d9d2b704
+      Hash: 09afc683ca480d77287b9eb903563e15
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerAttack
@@ -749,6 +776,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: HorizontalLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: ce669872a2be11bc686ea22961d8a3bb
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Joystick
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -823,7 +856,7 @@ ScriptsOnlyBuild:
     className: EnumerableTestState
   - hash:
       serializedVersion: 2
-      Hash: d2518959153d0a7ea2689416c03c9e07
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -853,13 +886,13 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: d0849dab757e23ff20123324821763d1
+      Hash: 5ed84cb83ba3d93b85e2ac2f158e8f5b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FirstPersonController
   - hash:
       serializedVersion: 2
-      Hash: 46f96d80d4fb717c3fdd042295dba0fc
+      Hash: cf16570eebf2531e251ca9ac7fb8b618
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Health
@@ -1009,6 +1042,12 @@ ScriptsOnlyBuild:
     className: EventTrigger
   - hash:
       serializedVersion: 2
+      Hash: ce669872a2be11bc686ea22961d8a3bb
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: FloatingJoystick
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
@@ -1057,7 +1096,7 @@ ScriptsOnlyBuild:
     className: ScrollRect
   - hash:
       serializedVersion: 2
-      Hash: b58bcd9812c78c98fe516ad4ced2c82f
+      Hash: 3f6a3884a279477e87d8cc41608030eb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Weapon
@@ -1105,7 +1144,7 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
-      Hash: 849b66593ba28129282e10cbe940ec56
+      Hash: dcd77daf8fc476109356edfd80a3308d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerData
@@ -1143,4 +1182,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/MainMenu.unity
   - Assets/Scenes/GamePlay.unity
-  playerPath: D:/Summer/Summer2021WorkPlacmentProject/localMobileFPS/AndroidBuild/AllForOneWin.apk
+  playerPath: D:/Summer/Summer2021WorkPlacmentProject/localMobileFPS/AndroidBuild/AllForOneWin_touch.apk

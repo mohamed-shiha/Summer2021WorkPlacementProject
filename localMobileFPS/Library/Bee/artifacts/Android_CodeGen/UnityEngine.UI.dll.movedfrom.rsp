@@ -19,8 +19,6 @@ Library\Bee\artifacts\movedfrom\UnityEngine.ARModule.dll_12466602785610577360.mo
 Library\Bee\artifacts\movedfrom\UnityEngine.AssetBundleModule.dll_16922400604133293623.movedfrom
 Library\Bee\artifacts\movedfrom\UnityEngine.AudioModule.dll_14993430416066485915.movedfrom
 Library\Bee\artifacts\movedfrom\UnityEngine.ClothModule.dll_3961965361293360511.movedfrom
-Library\Bee\artifacts\movedfrom\UnityEngine.ClusterInputModule.dll_14438821726506776591.movedfrom
-Library\Bee\artifacts\movedfrom\UnityEngine.ClusterRendererModule.dll_1666872850647900066.movedfrom
 Library\Bee\artifacts\movedfrom\UnityEngine.CoreModule.dll_16428589388801136702.movedfrom
 Library\Bee\artifacts\movedfrom\UnityEngine.CrashReportingModule.dll_5752173850855440022.movedfrom
 Library\Bee\artifacts\movedfrom\UnityEngine.DirectorModule.dll_7020023917644989915.movedfrom
@@ -72,7 +70,6 @@ Library\Bee\artifacts\movedfrom\UnityEngine.UnityWebRequestWWWModule.dll_1567210
 Library\Bee\artifacts\movedfrom\UnityEngine.VehiclesModule.dll_15649758079546004854.movedfrom
 Library\Bee\artifacts\movedfrom\UnityEngine.VFXModule.dll_15586093033129288205.movedfrom
 Library\Bee\artifacts\movedfrom\UnityEngine.VideoModule.dll_17662240264325970496.movedfrom
-Library\Bee\artifacts\movedfrom\UnityEngine.VirtualTexturingModule.dll_9394046244193706332.movedfrom
 Library\Bee\artifacts\movedfrom\UnityEngine.VRModule.dll_4743773504407265835.movedfrom
 Library\Bee\artifacts\movedfrom\UnityEngine.WindModule.dll_6506837427031955111.movedfrom
 Library\Bee\artifacts\movedfrom\UnityEngine.XRModule.dll_8400347876128272265.movedfrom
