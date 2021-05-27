@@ -303,6 +303,7 @@
 -r:"D:/Summer/Summer2021WorkPlacmentProject/localMobileFPS/Library/PackageCache/com.unity.nuget.mono-cecil@1.10.1-preview.1/Mono.Cecil.dll"
 -r:"D:/Summer/Summer2021WorkPlacmentProject/localMobileFPS/Library/PackageCache/com.unity.visualscripting@1.5.2/Runtime/VisualScripting.Core/Dependencies/MiscUtil/MiscUtil.dll"
 -r:"D:/Summer/Summer2021WorkPlacmentProject/localMobileFPS/Library/PackageCache/com.unity.visualscripting@1.5.2/Runtime/VisualScripting.Flow/Dependencies/NCalc/Antlr3.Runtime.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/projectCloner.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Multiplayer.MLAPI.Prototyping.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Multiplayer.MLAPI.Runtime.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Rider.Editor.ref.dll"
