@@ -74,13 +74,14 @@ public class PlayerData : NetworkBehaviour
 
     private void TeamValueChanged(Teams previousValue, Teams newValue)
     {
-        if (IsClient)
+/*        if (IsClient)
         {
-            LocalSetTeam(newValue);
-        }
+            LocalSetTeamClientRpc(newValue);
+        }*/
     }
 
-    public void LocalSetTeam(Teams newValue)
+    [ClientRpc]
+    public void LocalSetTeamClientRpc(Teams newValue)
     {
         Team = newValue;
         if (Renderer != null)
@@ -99,7 +100,7 @@ public class PlayerData : NetworkBehaviour
     public void _SetTeamServerRpc(Teams newTeam)
     {
         _team.Value = newTeam;
-        LocalSetTeam(newTeam);
+        LocalSetTeamClientRpc(newTeam);
     }
 
 

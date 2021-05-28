@@ -15,6 +15,7 @@ public class FirstPersonController : NetworkBehaviour
 
     public FixedJoystick LeftJoystick;
     public FixedJoystick RightJoystick;
+    public MobileTouchButton JumpButton;
 
     private void Start()
     {
@@ -40,7 +41,7 @@ public class FirstPersonController : NetworkBehaviour
     private void PlayerOutOfHealth()
     {
         //Debug.Log("FPC : player has no health ");
-        SpawnManager.Instance.GiveNewLocationAfterDeath(gameObject);
+        PlayerData.State = PlayerState.Dead;
         //RespawnClientRpc(Vector3.zero);
     }
 
@@ -65,11 +66,11 @@ public class FirstPersonController : NetworkBehaviour
                 HUD.gameObject.SetActive(true);
                 PlayerData.PlayMode = true;
                 PlayerAttack.PlayMode = true;
-                //Cursor.lockState = CursorLockMode.Locked;
-                //Cursor.visible = false;
-                //SpawnManager.Instance.GiveNewLocation_ServerRpc(gameObject);
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 break;
             case PlayerState.Dead:
+                SpawnManager.Instance.GiveNewLocationAfterDeath(gameObject);
                 break;
             case PlayerState.PreGame:
                 break;
@@ -95,18 +96,19 @@ public class FirstPersonController : NetworkBehaviour
     void Look()
     {
         //get the mouse input axis values
-        float xInput = 0,yInput = 0;
-        if (Application.platform == RuntimePlatform.WindowsPlayer)
+        float xInput = 0, yInput = 0;
+        if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
         {
             Debug.Log("In Windows");
-             xInput = Input.GetAxis("Mouse X") * PlayerData.mouseSensitivity;
-             yInput = Input.GetAxis("Mouse Y") * PlayerData.mouseSensitivity;
+            xInput = Input.GetAxis("Mouse X") * PlayerData.mouseSensitivity;
+            yInput = Input.GetAxis("Mouse Y") * PlayerData.mouseSensitivity;
 
-        }else if(Application.platform == RuntimePlatform.Android)
+        }
+        else if (Application.platform == RuntimePlatform.Android)
         {
-            Debug.Log("In Android");
+            //Debug.Log("In Android");
             xInput = RightJoystick.Horizontal * PlayerData.mouseSensitivity;
-             yInput = RightJoystick.Vertical * PlayerData.mouseSensitivity;
+            yInput = RightJoystick.Vertical * PlayerData.mouseSensitivity;
         }
         //turn the whole object based on the x input
         transform.Rotate(0, xInput, 0);
@@ -122,16 +124,16 @@ public class FirstPersonController : NetworkBehaviour
     {
         //update speed based on the input
         Vector3 input = Vector3.zero;
-        if (Application.platform == RuntimePlatform.WindowsPlayer)
+        if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
         {
-             input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
         }
         else if (Application.platform == RuntimePlatform.Android)
         {
             input = new Vector3(LeftJoystick.Horizontal, 0, LeftJoystick.Vertical);
         }
-         //input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        //input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         input = Vector3.ClampMagnitude(input, 1f);
         //transform it based off the player transform and scale it by movement speed
         Vector3 move = transform.TransformVector(input) * PlayerData.movementSpeed;
@@ -144,7 +146,7 @@ public class FirstPersonController : NetworkBehaviour
         {
             PlayerData.yVelocity = -PlayerData.gravity * Time.deltaTime;
             //check for jump here
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") || JumpButton.pressed)
             {
                 PlayerData.yVelocity = PlayerData.jumpSpeed;
             }

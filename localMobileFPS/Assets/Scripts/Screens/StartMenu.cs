@@ -1,4 +1,6 @@
 using System;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using MLAPI;
 using MLAPI.Messaging;
@@ -27,9 +29,12 @@ public class StartMenu : MonoBehaviour
     public Transform PlayerRecords;
     public Transform PlayModeScreen;
     public TMP_InputField ServerPasswordInput;
+    public TMP_InputField ServerIpAddress;
     public Button ConnectCreateButton;
     public Button ReadyPlayButton;
     public TMP_Dropdown TeamSelectDropDown;
+    public TextMeshProUGUI debugText;
+    string ipAddress;
 
     private void Start()
     {
@@ -41,6 +46,18 @@ public class StartMenu : MonoBehaviour
         TeamSelectDropDown.onValueChanged.AddListener((int value) => OnTeamSelected(TeamSelectDropDown.value));
         ConnectCreateButton.onClick.AddListener(() => ConnectOrHost(ConnectCreateButton.GetComponentInChildren<TextMeshProUGUI>().text));
         ShowScreen(ScreenNames.Start);
+
+
+        // testing
+        var host = Dns.GetHostEntry(Dns.GetHostName());
+        foreach (var ip in host.AddressList)
+        {
+            if (ip.AddressFamily == AddressFamily.InterNetwork)
+            {
+                debugText.text = ip.ToString();
+                break;
+            }
+        }
     }
     private void OnDestroy()
     {
@@ -130,6 +147,8 @@ public class StartMenu : MonoBehaviour
 
     public void ConnectOrHost(string button)
     {
+        NetworkManager.Singleton.GetComponent<UNetTransport>().ConnectAddress = ServerIpAddress.text;
+        ipAddress = ServerIpAddress.text;
         string buttonClickedName = button.ToLower();
         if (buttonClickedName.Equals("connect"))
             StartAsClient();
@@ -151,6 +170,7 @@ public class StartMenu : MonoBehaviour
 
     public void StartAsClient()
     {
+        //NetworkManager.Singleton.StopClient();
         ReadyPlayButton.GetComponentInChildren<TextMeshProUGUI>().text = "Ready";
         NetworkManager.Singleton.NetworkConfig.ConnectionData = Encoding.ASCII.GetBytes(ServerPasswordInput.text);
         NetworkManager.Singleton.StartClient();

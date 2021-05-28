@@ -296,6 +296,7 @@
 "Assets/Scripts/DataManager.cs"
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/LookAtTransform.cs"
+"Assets/Scripts/MobileUI/MobileTouchButton.cs"
 "Assets/Scripts/Player/FirstPersonController.cs"
 "Assets/Scripts/Player/Health.cs"
 "Assets/Scripts/Player/PlayerAnimationController.cs"

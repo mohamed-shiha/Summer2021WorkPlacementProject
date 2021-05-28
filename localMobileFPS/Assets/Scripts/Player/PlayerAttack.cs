@@ -10,11 +10,15 @@ public class PlayerAttack : NetworkBehaviour
     public Transform ADSPos;
     public bool PlayMode = false;
 
+    public MobileTouchButton FireButton;
+    public MobileTouchButton ADSButton;
+
+
     private void Start()
     {
         //if (IsLocalPlayer)
 
-       CurrentWeapon = GetComponentInChildren<Weapon>();
+        CurrentWeapon = GetComponentInChildren<Weapon>();
     }
 
     private void Update()
@@ -27,7 +31,15 @@ public class PlayerAttack : NetworkBehaviour
 
         if (!PlayMode)
             return;
-        else return;
+        // android input
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if(FireButton.pressed)
+                Fire();
+            SwicthADSServerRpc(ADSButton.pressed);
+            return;
+        }
+        // windows input 
         //Debug.Log("in update attack");
         switch (CurrentWeapon.firingMode)
         {
@@ -47,7 +59,6 @@ public class PlayerAttack : NetworkBehaviour
 
         if (Input.GetKeyUp(KeyCode.R))
             Reload();
-
         SwicthADSServerRpc(Input.GetMouseButton(1));
 
     }
@@ -56,13 +67,13 @@ public class PlayerAttack : NetworkBehaviour
     [ServerRpc]
     public void SwicthADSServerRpc(bool ads)
     {
-        SwicthADSClientRpc( ads);
+        SwicthADSClientRpc(ads);
     }
 
     [ClientRpc]
     public void SwicthADSClientRpc(bool ads)
     {
-        
+
         // this needs to be done using animations
         CurrentWeapon.transform.parent = ads ? ADSPos : HipPos;
         CurrentWeapon.transform.localPosition = Vector3.zero;
