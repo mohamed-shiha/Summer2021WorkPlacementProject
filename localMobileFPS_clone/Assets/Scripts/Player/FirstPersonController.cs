@@ -99,7 +99,7 @@ public class FirstPersonController : NetworkBehaviour
         float xInput = 0, yInput = 0;
         if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
         {
-            Debug.Log("In Windows");
+            //Debug.Log("In Windows");
             xInput = Input.GetAxis("Mouse X") * PlayerData.mouseSensitivity;
             yInput = Input.GetAxis("Mouse Y") * PlayerData.mouseSensitivity;
 
