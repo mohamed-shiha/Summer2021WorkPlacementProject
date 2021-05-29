@@ -55,6 +55,7 @@ public class StartMenu : MonoBehaviour
             if (ip.AddressFamily == AddressFamily.InterNetwork)
             {
                 debugText.text = ip.ToString();
+                ipAddress = ip.ToString();
                 break;
             }
         }
@@ -79,6 +80,8 @@ public class StartMenu : MonoBehaviour
     private void Singleton_OnClientConnectedCallback(ulong obj)
     {
         ShowScreen(ScreenNames.Lobby);
+        
+        OnTeamSelected(0);
     }
 
     private void Singleton_OnClientDisconnectCallback(ulong clientId)
@@ -148,12 +151,17 @@ public class StartMenu : MonoBehaviour
     public void ConnectOrHost(string button)
     {
         NetworkManager.Singleton.GetComponent<UNetTransport>().ConnectAddress = ServerIpAddress.text;
-        ipAddress = ServerIpAddress.text;
+        //ipAddress = ServerIpAddress.text;
         string buttonClickedName = button.ToLower();
         if (buttonClickedName.Equals("connect"))
             StartAsClient();
         else StartAsHost();
         //Debug.Log(button);
+    }
+
+    public void OnIpClicked()
+    {
+        ServerIpAddress.text = ipAddress;
     }
 
     public void ShowPlayerRecords()
@@ -173,7 +181,16 @@ public class StartMenu : MonoBehaviour
         //NetworkManager.Singleton.StopClient();
         ReadyPlayButton.GetComponentInChildren<TextMeshProUGUI>().text = "Ready";
         NetworkManager.Singleton.NetworkConfig.ConnectionData = Encoding.ASCII.GetBytes(ServerPasswordInput.text);
-        NetworkManager.Singleton.StartClient();
+        var task =  NetworkManager.Singleton.StartClient();
+        foreach (var item in task.Tasks)
+        {
+            Debug.Log("Is done ?"+item.IsDone);
+            Debug.Log("success ? "+item.Success);
+            Debug.Log(item.State +" "+ item.Message);
+            Debug.Log(item.TransportCode);
+            Debug.Log(item.TransportException);
+            //Debug.Log(item.Message);
+        }
     }
 
     public void StartAsHost()
