@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.ComTypes;
 using MLAPI;
 using MLAPI.Messaging;
 using UnityEngine;
@@ -25,15 +26,25 @@ public class Weapon : NetworkBehaviour
     public GameObject bulletPrefab;
     public FiringMode firingMode;
     public LayerMask DamageMask;
+   // [HideInInspector]
+    public Transform FirePoint;
 
     private float FireTime;
-    Transform FirePoint;
+    /*{
+        get
+        {
+            if (_FirePoint == null)
+                _FirePoint =  GetComponentInChildren<Camera>().transform;
+            return _FirePoint;
+        }
+    }*/
+    Transform _FirePoint;
 
     // run on server called by the client 
     [ClientRpc]
     private void FireClientRpc()
     {
-        Instantiate(bulletPrefab, FirePoint.position, FirePoint.rotation);
+        Instantiate(bulletPrefab, ADSFirePoint.position, ADSFirePoint.rotation);
         CurrentAmmo--;
     }
 
@@ -42,14 +53,14 @@ public class Weapon : NetworkBehaviour
     private void FireServerRpc()
     {
         FireClientRpc();
-        if(Physics.SphereCast(FirePoint.position,0.5f ,FirePoint.forward, out RaycastHit hit, MaxDistance * 10, DamageMask))
+        if (Physics.SphereCast(FirePoint.position, 0.5f, FirePoint.forward, out RaycastHit hit, MaxDistance * 100, DamageMask))
         //if (Physics.Raycast (FirePoint.position, FirePoint.forward, out RaycastHit hit,MaxDistance*10 ,DamageMask))
         {
             Debug.Log("On Server" + hit.transform.tag);
             var tag = hit.transform.tag;
             if (tag.Contains("Player"))
             {
-                float damage = tag.Contains("Body")? BodyDamage : HeadDamage;
+                float damage = tag.Contains("Body") ? BodyDamage : HeadDamage;
                 var health = hit.transform.GetComponentInParent<Health>();
                 health.TakeDamage(damage);
             }
@@ -57,13 +68,11 @@ public class Weapon : NetworkBehaviour
         }
     }
 
-    public virtual void Fire()
+    public virtual void Fire(Transform camera)
     {
+        //FirePoint = camera;
         if (FireTime <= Time.time)
         {
-            //on = true;
-            /*if (FirePoint == null)
-                FirePoint = ADSFirePoint;*/
             FireServerRpc();
             FireTime = Time.time + FireRate;
         }
@@ -105,7 +114,7 @@ public class Weapon : NetworkBehaviour
     [ClientRpc]
     public void SwitchADSClientRpc(bool isAds)
     {
-        FirePoint = isAds ? ADSFirePoint : HipFirePoint;
+        //FirePoint = isAds ? ADSFirePoint : HipFirePoint;
         //transform.parent = ads ? ADSPos : HipPos;
         //transform.localPosition = Vector3.zero;
     }

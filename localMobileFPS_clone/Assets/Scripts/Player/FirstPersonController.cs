@@ -13,8 +13,8 @@ public class FirstPersonController : NetworkBehaviour
     PlayerAttack PlayerAttack;
     Health PlayerHealth;
 
-    public FixedJoystick LeftJoystick;
-    public FixedJoystick RightJoystick;
+    public Joystick LeftJoystick;
+    public Joystick RightJoystick;
     public MobileTouchButton JumpButton;
 
     private void Start()
@@ -66,8 +66,8 @@ public class FirstPersonController : NetworkBehaviour
                 HUD.gameObject.SetActive(true);
                 PlayerData.PlayMode = true;
                 PlayerAttack.PlayMode = true;
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                // Cursor.lockState = CursorLockMode.Locked;
+                //Cursor.visible = false;
                 break;
             case PlayerState.Dead:
                 SpawnManager.Instance.GiveNewLocationAfterDeath(gameObject);
@@ -97,7 +97,9 @@ public class FirstPersonController : NetworkBehaviour
     {
         //get the mouse input axis values
         float xInput = 0, yInput = 0;
-        if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+        //xInput = Input.GetAxis("Mouse X") * PlayerData.mouseSensitivity;
+        //yInput = Input.GetAxis("Mouse Y") * PlayerData.mouseSensitivity;
+      if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
         {
             //Debug.Log("In Windows");
             xInput = Input.GetAxis("Mouse X") * PlayerData.mouseSensitivity;

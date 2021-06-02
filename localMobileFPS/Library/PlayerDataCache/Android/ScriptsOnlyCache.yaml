@@ -5,6 +5,7 @@ ScriptsOnlyBuild:
     - DataManager
     - FirstPersonController
     - FixedJoystick
+    - FloatingJoystick
     - GameManager
     - Health
     - LookAtTransform
@@ -200,6 +201,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 5898}
     - Class: 114
       Script: {instanceID: 6148}
+    - Class: 114
+      Script: {instanceID: 6196}
     - Class: 114
       Script: {instanceID: 6226}
     - Class: 114
@@ -751,7 +754,7 @@ ScriptsOnlyBuild:
     className: Toggle
   - hash:
       serializedVersion: 2
-      Hash: f5479236186da6f304da45f6b50f1f93
+      Hash: 2cc3888b4380668b8802729f865c9def
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerAttack
@@ -883,7 +886,7 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: 1c224d23c3e8d0ba578b955031ff2ba1
+      Hash: ecfdc67e57b1cff01846efe275e11873
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FirstPersonController
@@ -1093,7 +1096,7 @@ ScriptsOnlyBuild:
     className: ScrollRect
   - hash:
       serializedVersion: 2
-      Hash: 3f6a3884a279477e87d8cc41608030eb
+      Hash: 29f5eb63e0f20ecfc8c4090075a3a399
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Weapon

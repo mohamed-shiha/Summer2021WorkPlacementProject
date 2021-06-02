@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : NetworkBehaviour
 {
+    public Transform Camera;
     public Weapon CurrentWeapon;
     public Weapon PreviousWeapon;
     public Transform HipPos;
@@ -19,6 +20,7 @@ public class PlayerAttack : NetworkBehaviour
         //if (IsLocalPlayer)
 
         CurrentWeapon = GetComponentInChildren<Weapon>();
+        CurrentWeapon.FirePoint = Camera;
     }
 
     private void Update()
@@ -77,7 +79,7 @@ public class PlayerAttack : NetworkBehaviour
         // this needs to be done using animations
         CurrentWeapon.transform.parent = ads ? ADSPos : HipPos;
         CurrentWeapon.transform.localPosition = Vector3.zero;
-        CurrentWeapon.SwitchADSClientRpc(ads);
+        //CurrentWeapon.SwitchADSClientRpc(ads);
     }
 
     //[ServerRpc]
@@ -89,7 +91,7 @@ public class PlayerAttack : NetworkBehaviour
         //Debug.Log("Trying to fire the weapon");
         if (CurrentWeapon.CurrentAmmo <= 0)
             CurrentWeapon.ReloadServerRpc();
-        else CurrentWeapon.Fire();
+        else CurrentWeapon.Fire(Camera);
     }
 
     public void Reload()
